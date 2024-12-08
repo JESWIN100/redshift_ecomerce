@@ -1,0 +1,299 @@
+
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+	<style>
+		.tbl-title {
+			font-size: 2.5rem;
+			font-weight: bold;
+			color: #444;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			margin-bottom: 1.5rem;
+		}
+	
+		.btn-primary {
+			background-color: #007bff;
+			border-color: #007bff;
+			border-radius: 50px;
+			font-weight: 600;
+			padding: 10px 30px;
+			transition: all 0.3s ease;
+		}
+	
+		.btn-primary:hover {
+			background-color: #0056b3;
+			border-color: #004085;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
+	
+		.form-control {
+			border-radius: 0.75rem;
+			font-size: 1.1rem;
+			padding: 1rem;
+			border-color: #ccc;
+			box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+			transition: border-color 0.3s ease;
+		}
+	
+		.form-control:focus {
+			border-color: #007bff;
+			box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+		}
+	
+		.form-group label {
+			font-weight: 600;
+			font-size: 1.1rem;
+		}
+	
+		.shadow-lg {
+			box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+		}
+	
+		.bg-light {
+			background-color: #f9f9f9;
+		}
+	
+		.form-check-label {
+			font-weight: 600;
+			font-size: 1.1rem;
+		}
+	
+		@media (max-width: 768px) {
+			.col-md-8 {
+				width: 100%;
+			}
+		}
+	</style>
+	<!-- WRAPPER -->
+	<div class="wrapper">
+
+		<!-- LEFT MAIN SIDEBAR -->
+		<%-include('../partials/adminsidenav' )%>
+
+		<!-- PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<%-include('../partials/adminHeader' )%>
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper breadcrumb-wrapper-2">
+						<h1>Order Detail</h1>
+						<p class="breadcrumbs"><span><a href="/admin/home">Home</a></span>
+							<span><i class="mdi mdi-chevron-right"></i></span>Orders
+						</p>
+					</div>
+					
+					<div class="row">
+						<div class="col-12">
+							<div class="ec-odr-dtl card card-default">
+								<div class="card-header card-header-border-bottom d-flex justify-content-between">
+									<h2 class="ec-odr">Order Detail<br>
+										<span class="small">Order ID: #<%= order.id %></span>
+									</h2>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-xl-3 col-lg-6">
+											<address class="info-grid">
+												<div class="info-title"><strong>Customer:</strong></div><br>
+												<div class="info-content">
+													<%= order.firstname %> <%= order.lastname %>.<br>
+													<%= order.address %>,<br>
+													<%= order.country %>, <%= order.postalcode %><br>
+													<abbr title="Phone">Phone:</abbr> <%= userDetail.phone %>.
+												</div>
+											</address>
+										</div>
+										
+										<div class="col-xl-3 col-lg-6">
+											<address class="info-grid">
+												<div class="info-title"><strong>Payment Method:</strong></div><br>
+												<div class="info-content">
+															<%= order.payment_method %><br>
+													
+												</div>
+											</address>
+										</div>
+										<div class="col-xl-3 col-lg-6">
+											<address class="info-grid">
+												<div class="info-title"><strong>Order Date:</strong></div><br>
+												<div class="info-content">
+													<!-- 4:34PM,<br> -->
+													<%= order.created_at %>
+												</div>
+											</address>
+										</div>
+									</div>
+									
+									
+								
+									
+									
+									<div class="row">
+										<div class="col-md-12">
+											<h3 class="tbl-title">PRODUCT SUMMARY</h3>
+											<div class="table-responsive">
+												<table class="table table-striped o-tbl">
+													<thead>
+														<tr class="line">
+															<td><strong>#</strong></td>
+															<td class="text-center"><strong>IMAGE</strong></td>
+															<td class="text-center"><strong>PRODUCT</strong></td>
+															<td class="text-center"><strong>PRICE/UNIT</strong></td>
+															<td class="text-right"><strong>QUANTITY</strong></td>
+															<td class="text-right"><strong>SUBTOTAL</strong></td>
+														</tr>
+													</thead>
+													<tbody>
+														<% items.forEach((item, index) => { %>
+															<tr>
+																<td><%= index + 1 %></td>
+																<td><img class="product-img" src="<%= item.product_image %>" alt="<%= item.product_name %>" /></td>
+																<td><strong><%= item.product_name %></strong><br><%= item.product_description || 'No description available' %></td>
+																<td class="text-center">AED <%= parseFloat(item.product_price).toFixed(2) %></td>
+																<td class="text-center"><%= item.quantity %></td>
+																<td class="text-right">AED <%= (parseFloat(item.product_price) * item.quantity).toFixed(2) %></td>
+															</tr>
+														<% }) %>
+													</tbody>
+													<tr>
+														<td colspan="4"></td>
+														<td class="text-right"><strong>Taxes</strong></td>
+														<td class="text-right"><strong>N/A</strong></td>
+													</tr>
+													<tr>
+														<td colspan="4"></td>
+														<td class="text-right"><strong>Total</strong></td>
+														<td class="text-right"><strong>AED <%= totalAmount.toFixed(2) %></strong></td>
+													</tr>
+													<tr>
+														<td colspan="4"></td>
+														<td class="text-right"><strong>Payment Status</strong></td>
+														<td class="text-right">
+															<% if (order.payment_status === 'success') { %>
+															  <strong>PAID</strong>
+															<% } else { %>
+															  <strong>NOT PAID</strong>
+															<% } %>
+														  </td>
+														  
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="col-md-8">
+											<h3 class="tbl-title text-center mb-4">ORDER STATUS</h3>
+											
+											<!-- Display current order status -->
+											<div class="mb-4 text-center">
+												<h4>Current Status: <span class=""><%= order.order_status.charAt(0).toUpperCase() + order.order_status.slice(1) %></span></h4>
+											</div>
+											
+											<form action="/admin/update-order-status" method="POST" class="shadow-lg p-5 rounded bg-light" id="statusForm">
+												<div class="form-group mb-4">
+													<label for="order-status" class="font-weight-semibold" style="font-size: 1.1rem; color: #333;">Change Order Status:</label>
+													<input type="hidden" name="customer_email" value="<%= order.customer_email %>">
+													<input type="hidden" name="customer_name" value="<%= order.firstname %>">
+													<!-- Radio buttons for order status -->
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="order_status" id="order-confirmed" value="Order Confirmed" <%= order.order_status === 'Order Confirmed' ? 'checked' : '' %>>
+														<label class="form-check-label" for="order-confirmed">
+															Order Confirmed
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="order_status" id="shipped" value="Shipped" <%= order.order_status === 'Shipped' ? 'checked' : '' %>>
+														<label class="form-check-label" for="shipped">
+															Shipped
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="order_status" id="delivered" value="Delivered" <%= order.order_status === 'Delivered' ? 'checked' : '' %>>
+														<label class="form-check-label" for="delivered">
+															Delivered
+														</label>
+													</div>
+													<div class="form-check">
+														<input class="form-check-input" type="radio" name="order_status" id="cancelled" value="Cancelled" <%= order.order_status === 'Cancelled' ? 'checked' : '' %>>
+														<label class="form-check-label" for="cancelled">
+															Cancelled
+														</label>
+													</div>
+												</div>
+												
+												<input type="hidden" name="order_id" value="<%= order.id %>">
+												
+												<div class="d-flex justify-content-center">
+													<button type="submit" class="btn btn-primary btn-lg px-4 py-2 mt-3">Update Status</button>
+												</div>
+											</form>
+										</div>
+									</div>
+									
+									
+									
+									
+									<!-- SweetAlert2 Script -->
+									<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+									
+									<script>
+										// Add event listener to the form submission
+										document.getElementById('statusForm').addEventListener('submit', function (e) {
+											e.preventDefault(); // Prevent form from submitting immediately
+									
+											// Show confirmation SweetAlert
+											Swal.fire({
+												title: 'Are you sure?',
+												text: "Do you want to update the order status?",
+												icon: 'warning',
+												showCancelButton: true,
+												confirmButtonColor: '#3085d6',
+												cancelButtonColor: '#d33',
+												confirmButtonText: 'Yes, update it!',
+												cancelButtonText: 'No, cancel'
+											}).then((result) => {
+												if (result.isConfirmed) {
+													// If confirmed, submit the form
+													window.location.reload()
+
+													e.target.submit();
+													
+												}
+											});
+										});
+									</script>
+									
+
+									
+								</div>
+							</div>
+							<!-- Tracking Detail -->
+							
+						</div>
+					</div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+			<!-- Footer -->
+			<footer class="footer mt-auto">
+				<div class="copyright bg-white">
+					<p>
+						Copyright &copy; <span id="ec-year"></span><a class="text-primary"
+							href="https://themeforest.net/user/ashishmaraviya" target="_blank"> Ekka Admin
+							Dashboard</a>. All Rights Reserved.
+					</p>
+				</div>
+			</footer>
+
+		</div> <!-- End Page Wrapper -->
+	</div> <!-- End Wrapper -->
+	
+	
+</body>
+
+</html>

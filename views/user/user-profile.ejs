@@ -1,0 +1,387 @@
+
+<body class="shop_page">
+    <div id="ec-overlay">
+        <div class="ec-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Header start  -->
+    <%-include('../partials/userHeader' )%>
+    <!-- Header End  -->
+
+    <!-- ekka Cart Start -->
+   
+    <!-- ekka Cart End -->
+
+    <!-- Ec breadcrumb start -->
+    <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row ec_breadcrumb_inner">
+                        <div class="col-md-6 col-sm-12">
+                            <h2 class="ec-breadcrumb-title">User Profile</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <!-- ec-breadcrumb-list start -->
+                            <ul class="ec-breadcrumb-list">
+                                <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="ec-breadcrumb-item active">Profile</li>
+                            </ul>
+                            <!-- ec-breadcrumb-list end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ec breadcrumb end -->
+
+    <!-- User profile section -->
+    <section class="ec-page-content ec-vendor-uploads ec-user-account section-space-p">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Area Start -->
+                <div class="ec-shop-leftside ec-vendor-sidebar col-lg-3 col-md-12">
+                    <div class="ec-sidebar-wrap ec-border-box">
+                        <!-- Sidebar Category Block -->
+                        <div class="ec-sidebar-block">
+                            <div class="ec-vendor-block">
+                                <!-- <div class="ec-vendor-block-bg"></div>
+                                <div class="ec-vendor-block-detail">
+                                    <img class="v-img" src="assets/images/user/1.jpg" alt="vendor image">
+                                    <h5>Mariana Johns</h5>
+                                </div> -->
+                                <div class="ec-vendor-block-items">
+                                    <ul>
+                                        <li><a href="/profile">User Profile</a></li>
+                                        <li><a href="/history">History</a></li>
+                                        <li><a href="/cart">Cart</a></li>
+                            
+                    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ec-shop-rightside col-lg-9 col-md-12">
+                    <div class="ec-vendor-dashboard-card ec-vendor-setting-card">
+                        <div class="ec-vendor-card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="ec-vendor-block-profile">
+                                        <div class="ec-vendor-block-img space-bottom-30">
+                                            <div class="ec-vendor-block-bg">
+                                                <a href="#" class="btn btn-lg btn-primary"
+                                                    data-link-action="editmodal" title="Edit Detail"
+                                                    data-bs-toggle="modal" data-bs-target="#edit_modal">Edit Detail</a>
+                                            </div>
+                                            <div class="ec-vendor-block-detail">
+                                                <img class="v-img" src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="vendor image">
+                                                <h5 class="name"><%=user.name %></h5>
+                                                <!-- <p>( Business Man )</p> -->
+                                            </div>
+                                            <p>Hello <span><%=user.name %>!</span></p>
+                                            <p>From your account you can easily view and track orders. You can manage and change your account information like address, contact information and history of orders.</p>
+                                        </div>
+                                        <h5>Account Information</h5>
+
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="ec-vendor-detail-block ec-vendor-block-email space-bottom-30">
+                                                    <h6>E-mail address</h6>
+                                                    <ul>
+                                                        <li><strong>Email : </strong><%=user.email %></li>
+                                                        <!-- <li><strong>Email 2 : </strong>support2@exapmle.com</li> -->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="ec-vendor-detail-block ec-vendor-block-contact space-bottom-30">
+                                                    <h6>Contact nubmer<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal"><i class="fi-rr-edit"></i></a></h6>
+                                                    <ul>
+                                                        <li><strong>Phone Nubmer : </strong><%=user.phone %></li>
+                                                        <!-- <li><strong>Phone Nubmer 2 : </strong>(123) 123 456 7890</li> -->
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="ec-vendor-detail-block ec-vendor-block-address mar-b-30">
+                                                    <h6>Address<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal"><i class="fi-rr-edit"></i></a></h6>
+                                                    <ul>
+                                                        <li><strong>Home :<%=user.address %> </strong>.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="ec-vendor-detail-block ec-vendor-block-address mar-b-30">
+                                                    <h6>Address 2<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal"><i class="fi-rr-edit"></i></a></h6>
+                                                    <ul>
+                                                        <li><strong>Home :<%=user.address2 %> </strong>.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-12">
+                                                <div class="ec-vendor-detail-block ec-vendor-block-address mar-b-30">
+                                                    <h6>Address 3<a href="javasript:void(0)" data-link-action="editmodal" title="Edit Detail" data-bs-toggle="modal" data-bs-target="#edit_modal"><i class="fi-rr-edit"></i></a></h6>
+                                                    <ul>
+                                                        <li><strong>Home :<%=user.address3 %> </strong>.</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End User profile section -->
+
+    <!-- Footer Start -->
+    <%-include('../partials/userFooter' )%>
+    <!-- Footer Area End -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="edit_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="ec-vendor-block-img space-bottom-30">
+                            <div class="ec-vendor-block-bg cover-upload">
+                                <div class="thumb-upload">
+                                    <div class="thumb-edit">
+                                        <input type='file' id="thumbUpload01" class="ec-image-upload"
+                                            accept=".png, .jpg, .jpeg" />
+                                        <!-- <label><i class="fi-rr-edit"></i></label> -->
+                                    </div>
+                                    <div class="thumb-preview ec-preview">
+                                        <div class="image-thumb-preview">
+                                            <img class="image-thumb-preview ec-image-preview v-img"
+                                                src="assets/images/banner/8.jpg" alt="edit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ec-vendor-block-detail">
+                                <div class="thumb-upload">
+                                    <div class="thumb-edit">
+                                        <input type='file' id="thumbUpload02" class="ec-image-upload"
+                                            accept=".png, .jpg, .jpeg" />
+                                        <!-- <label><i class="fi-rr-edit"></i></label> -->
+                                    </div>
+                                    <div class="thumb-preview ec-preview">
+                                        <div class="image-thumb-preview">
+                                            <img class="image-thumb-preview ec-image-preview v-img"
+                                                src="assets/images/user/1.jpg" alt="edit" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ec-vendor-upload-detail">
+                                <form action="/profile/update" method="POST" class="row g-3">
+                                    <div class="col-md-6 space-t-15">
+                                        <label class="form-label">First name</label>
+                                        <input type="text" class="form-control" name="name" value="<%=user.name %>">
+                                    </div>
+                                    <div class="col-md-12 space-t-15">
+                                        <label class="form-label">Address 1</label>
+                                        <input type="text" name="address" class="form-control" value="<%=user.address %>">
+                                    </div>
+                                    <div class="col-md-12 space-t-15">
+                                        <label class="form-label">Address 2</label>
+                                        <input type="text" class="form-control" name="address2" value="<%=user.address2 %>">
+                                    </div>
+                                    <div class="col-md-12 space-t-15">
+                                        <label class="form-label">Address 3</label>
+                                        <input type="text" class="form-control" name="address3" value="<%=user.address3 %>">
+                                    </div>
+                                 
+                                    <div class="col-md-6 space-t-15">
+                                        <label class="form-label">Phone number</label>
+                                        <input type="text" name="phone" class="form-control" value="<%=user.phone %>">
+                                    </div>
+                                   
+                                    <div class="col-md-12 space-t-15">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <a href="#" class="btn btn-lg btn-secondary qty_close" data-bs-dismiss="modal"
+                                            aria-label="Close">Close</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal end -->
+
+    <!-- Footer navigation panel for responsive display -->
+    <div class="ec-nav-toolbar">
+        <div class="container">
+            <div class="ec-nav-panel">
+                <div class="ec-nav-panel-icons">
+                    <a href="#ec-mobile-menu" class="navbar-toggler-btn ec-header-btn ec-side-toggle"><i
+                            class="fi-rr-menu-burger"></i></a>
+                </div>
+                <div class="ec-nav-panel-icons">
+                    <a href="#ec-side-cart" class="toggle-cart ec-header-btn ec-side-toggle"><i
+                            class="fi-rr-shopping-bag"></i><span
+                            class="ec-cart-noti ec-header-count cart-count-lable">3</span></a>
+                </div>
+                <div class="ec-nav-panel-icons">
+                    <a href="index.html" class="ec-header-btn"><i class="fi-rr-home"></i></a>
+                </div>
+                <div class="ec-nav-panel-icons">
+                    <a href="wishlist.html" class="ec-header-btn"><i class="fi-rr-heart"></i><span
+                            class="ec-cart-noti">4</span></a>
+                </div>
+                <div class="ec-nav-panel-icons">
+                    <a href="login.html" class="ec-header-btn"><i class="fi-rr-user"></i></a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Footer navigation panel for responsive display end -->
+
+    <!-- Recent Purchase Popup  -->
+    <div class="recent-purchase">
+        <img src="assets/images/product-image/1.jpg" alt="payment image">
+        <div class="detail">
+            <p>Someone in new just bought</p>
+            <h6>stylish baby shoes</h6>
+            <p>10 Minutes ago</p>
+        </div>
+        <a href="javascript:void(0)" class="icon-btn recent-close">×</a>
+    </div>
+    <!-- Recent Purchase Popup end -->
+
+    <!-- Cart Floating Button -->
+    <div class="ec-cart-float">
+        <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
+            <div class="header-icon"><i class="fi-rr-shopping-basket"></i>
+            </div>
+            <span class="ec-cart-count cart-count-lable">3</span>
+        </a>
+    </div>
+    <!-- Cart Floating Button end -->
+
+    <!-- Whatsapp -->
+    <div class="ec-style ec-right-bottom">
+        <!-- Start Floating Panel Container -->
+   
+        <!--/ End Floating Panel Container -->
+        <!-- Start Right Floating Button-->
+        <div class="ec-right-bottom">
+            <div class="ec-box">
+                
+            </div>
+        </div>
+        <!--/ End Right Floating Button-->
+    </div>
+    <!-- Whatsapp end -->
+
+ 
+        <div class="tool-title">
+            <h3>Features</h3>
+        </div>
+        <a href="#" class="ec-tools-sidebar-toggle in-out">
+            <img alt="icon" src="assets/images/common/settings.png" />
+        </a>
+        <div class="ec-tools-detail">
+            <div class="ec-tools-sidebar-content ec-change-color ec-color-desc">
+                <h3>Color Scheme</h3>
+                <ul class="bg-panel">
+                    <li class="active" data-color="01"><a href="#" class="colorcode1"></a></li>
+                    <li data-color="02"><a href="#" class="colorcode2"></a></li>
+                    <li data-color="03"><a href="#" class="colorcode3"></a></li>
+                    <li data-color="04"><a href="#" class="colorcode4"></a></li>
+                    <li data-color="05"><a href="#" class="colorcode5"></a></li>
+                </ul>
+            </div>
+            <div class="ec-tools-sidebar-content">
+                <h3>Backgrounds</h3>
+                <ul class="bg-panel">
+                    <li class="bg"><a class="back-bg-1" id="bg-1">Background-1</a></li>
+                    <li class="bg"><a class="back-bg-2" id="bg-2">Background-2</a></li>
+                    <li class="bg"><a class="back-bg-3" id="bg-3">Background-3</a></li>
+                    <li class="bg"><a class="back-bg-4" id="bg-4">Default</a></li>
+                </ul>
+            </div>
+            <div class="ec-tools-sidebar-content">
+                <h3>Full Screen mode</h3>
+                <div class="ec-fullscreen-mode">
+                    <div class="ec-fullscreen-switch">
+                        <div class="ec-fullscreen-btn">Mode</div>
+                        <div class="ec-fullscreen-on">On</div>
+                        <div class="ec-fullscreen-off">Off</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ec-tools-sidebar-content">
+                <h3>Dark mode</h3>
+                <div class="ec-change-mode">
+                    <div class="ec-mode-switch">
+                        <div class="ec-mode-btn">Mode</div>
+                        <div class="ec-mode-on">On</div>
+                        <div class="ec-mode-off">Off</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ec-tools-sidebar-content">
+                <h3>RTL mode</h3>
+                <div class="ec-change-rtl">
+                    <div class="ec-rtl-switch">
+                        <div class="ec-rtl-btn">Rtl</div>
+                        <div class="ec-rtl-on">On</div>
+                        <div class="ec-rtl-off">Off</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ec-tools-sidebar-content">
+                <h3>Clear local storage</h3>
+                <a class="clear-cach" href="javascript:void(0)">Clear Cache & Default</a>
+            </div>
+        </div>
+    </div>
+    <!-- Feature tools end -->
+<script>
+     document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+    
+            // Show success toast for removed item
+            if (urlParams.get('success') === 'true') {
+                if (typeof Swal !== "undefined") { // Ensure Swal is loaded
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Updated Success!',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+    
+                    // Optionally remove the query parameter from the URL
+                    const newUrl = window.location.origin + window.location.pathname;
+                    window.history.replaceState({}, document.title, newUrl);
+                } else {
+                    console.error("SweetAlert is not loaded on this page.");
+                }
+            }
+        });
+
+</script>
+
+</body>
+</html>

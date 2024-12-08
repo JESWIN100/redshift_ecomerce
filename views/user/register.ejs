@@ -1,0 +1,107 @@
+
+<body class="register_page">
+    
+
+    <!-- ekka Cart Start -->
+   
+    <!-- ekka Cart End -->
+
+    <!-- Ec breadcrumb start -->
+    <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row ec_breadcrumb_inner">
+                        <div class="col-md-6 col-sm-12">
+                            <h2 class="ec-breadcrumb-title">Register</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <!-- ec-breadcrumb-list start -->
+                            <ul class="ec-breadcrumb-list">
+                                <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="ec-breadcrumb-item active">Register</li>
+                            </ul>
+                            <!-- ec-breadcrumb-list end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ec breadcrumb end -->
+
+    <!-- Start Register -->
+    <section class="ec-page-content section-space-p">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <h2 class="ec-bg-title">Register</h2>
+                        <h2 class="ec-title">Register</h2>
+                        <p class="sub-title mb-3">Best place to buy and sell digital products</p>
+                    </div>
+                </div>
+                <div class="ec-register-wrapper">
+                    <div class="ec-register-container">
+                        <div class="ec-register-form">
+                            <% if (messages.error) { %>
+                                <div class="alert alert-danger">
+                                    <%= messages.error %>
+                                </div>
+                            <% } %>
+                            <form id="registerForm" action="/register" method="post" onsubmit="return validatePassword()">
+                                <div class="ec-register-wrap ec-register-half">
+                                    <label for="firstname">Full Name*</label>
+                                    <input type="text" id="name" name="name" placeholder="Enter your first name" required />
+                                </div>
+                                <div class="ec-register-wrap ec-register-half">
+                                    <label for="email">Email*</label>
+                                    <input type="email" id="email" name="email" placeholder="Enter your email address" required />
+                                </div>
+                                <div class="ec-register-wrap ec-register-half">
+                                    <label for="phonenumber">Phone Number*</label>
+                                    <input type="text" id="phone" name="phone" placeholder="Enter your phone number" required />
+                                </div>
+                                <div class="ec-register-wrap ec-register-half">
+                                    <label for="password">Password*</label>
+                                    <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                                </div>
+                                <div class="ec-register-wrap ec-register-half">
+                                    <label for="confirm_password">Confirm Password*</label>
+                                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required />
+                                </div>
+                               
+                                <div class="ec-register-wrap ec-register-btn">
+                                    <button class="btn btn-primary" type="submit">Register</button>
+                                </div>
+                            </form>
+                            <div style="margin-top: 15px;">
+                                <p class="sign-upp">Already have an account?
+                                    <a class="text-blue" href="/login">Log In</a>
+                                </p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Register -->
+
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementsByName("password")[0].value;
+            var confirmPassword = document.getElementsByName("confirm_password")[0].value;
+    
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return false; // Prevent form submission
+            }
+            return true; // Proceed with form submission
+        }
+    </script>
+
+</body>
+</html>

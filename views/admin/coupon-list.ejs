@@ -1,0 +1,154 @@
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+    <!-- WRAPPER -->
+    <div class="wrapper">
+
+        <!-- LEFT MAIN SIDEBAR -->
+        <%-include('../partials/adminsidenav' )%>
+
+        <!-- PAGE WRAPPER -->
+        <div class="ec-page-wrapper">
+
+            <!-- Header -->
+            <%-include('../partials/adminHeader' )%>
+
+            <!-- CONTENT WRAPPER -->
+            <div class="container my-4">
+                <header class="d-flex justify-content-between align-items-center bg-primary text-white p-3 rounded">
+                    <div class="logo d-flex align-items-center">
+                        <span class="fs-4 me-2">📊</span> <strong>Coupon Code Manager</strong>
+                    </div>
+                    <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#createCouponModal">Create Coupon</button>
+                </header>
+                <main class="content my-4">
+                    <h1 class="fs-5">All Coupons</h1>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Coupon Name</th>
+                                    <th>Discount</th>
+                                    <th>Validity</th>
+                                    <th>Created At</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% if (coupons.length > 0) { %>
+                                    <% coupons.reverse().forEach(coupon => { %>
+                                        <tr>
+                                            <td><%= coupon.couponcode %></td>
+                                            <td>AED <%= coupon.discount %></td>
+                                            <td><%= coupon.validity %></td>
+                                            <td><%= coupon.created_at %></td>
+                                            <td>
+                                                <form action="/admin/delete-coupon/<%= coupon.id %>" method="POST" style="display: inline;" onsubmit="return confirmDelete();">
+                                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    <% }); %>
+                                <% } else { %>
+                                    <tr>
+                                        <td colspan="5" class="text-center">No coupons available</td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </main>
+            </div>
+
+            <!-- Create Coupon Modal -->
+            <div class="modal fade" id="createCouponModal" tabindex="-1" aria-labelledby="createCouponModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createCouponModalLabel">Create New Coupon</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/admin/add-coupon" method="POST">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="couponCode" class="form-label">Coupon Code</label>
+                                    <input type="text" class="form-control" id="couponCode" name="couponcode" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="discount" class="form-label">Discount (AED)</label>
+                                    <input type="number" class="form-control" id="discount" name="discount" required>
+                                </div>
+                               
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save Coupon</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <%-include('../partials/adminFooter' )%>
+        </div> <!-- End Page Wrapper -->
+    </div> <!-- End Wrapper -->
+
+    <!-- SweetAlert2 -->
+
+
+    <!-- Show Toast -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Ensure Swal is loaded
+    if (typeof Swal !== "undefined") {
+
+        // Show success toast for added coupon
+        if (urlParams.get('success') === 'true') {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Coupon added successfully!',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            // Optionally, remove the 'success' parameter from the URL
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+
+        // Show success toast for deleted coupon
+        if (urlParams.get('deleted') === 'true') {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Coupon deleted successfully!',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            // Optionally, remove the 'deleted' parameter from the URL
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        }
+
+    } else {
+        console.error("SweetAlert is not loaded on this page.");
+    }
+});
+
+    </script>
+    
+    <script>
+        function confirmDelete() {
+            return confirm("Are you sure you want to delete this coupon?");
+        }
+    </script>
+    
+
+</body>

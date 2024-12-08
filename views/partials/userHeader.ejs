@@ -1,0 +1,515 @@
+<style>
+ .search-dropdown {
+    position: absolute;
+    background: #fff;
+    border: 1px solid #ddd;
+    width: 100%;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    left: 0; /* Align with the input field */
+    top: 100%; /* Position it just below the search input */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
+    border-radius: 4px; /* Smooth corners */
+}
+
+.search-dropdown div {
+    padding: 10px;
+    cursor: pointer;
+    display: flex; /* Flexbox for image and text alignment */
+    align-items: center;
+}
+
+.search-dropdown div img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    margin-right: 10px;
+    border-radius: 4px; /* Rounded image */
+}
+
+.search-dropdown div:hover {
+    background: #f1f1f1;
+}
+@media (min-width: 769px) {
+    .header-search.small {
+        display: none; /* Hide small search box on large screens */
+    }
+
+    .header-search.big {
+        display: block; /* Ensure big search box is visible */
+    }
+}
+
+</style>
+<header class="ec-header">
+    <!--Ec Header Top Start -->
+    <div class="header-top">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Header Top social Start -->
+                <!-- <div class="col text-left header-top-left d-none d-lg-block">
+                    <div class="header-top-social">
+                        <span class="social-text text-upper">Follow us on:</span>
+                        <ul class="mb-0">
+                            <li class="list-inline-item"><a class="hdr-facebook" href="#"><i
+                                        class="ecicon eci-facebook"></i></a></li>
+                            <li class="list-inline-item"><a class="hdr-twitter" href="#"><i
+                                        class="ecicon eci-twitter"></i></a></li>
+                            <li class="list-inline-item"><a class="hdr-instagram" href="#"><i
+                                        class="ecicon eci-instagram"></i></a></li>
+                            <li class="list-inline-item"><a class="hdr-linkedin" href="#"><i
+                                        class="ecicon eci-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div> -->
+                <!-- Header Top social End -->
+                <!-- Header Top Message Start -->
+                <!-- <div class="col text-center header-top-center">
+                    <div class="header-top-message text-upper">
+                        <span>Free Shipping</span>This Week Order Over - $75
+                    </div>
+                </div> -->
+                <!-- Header Top Message End -->
+                <!-- Header Top Language Currency -->
+                <div class="col header-top-right d-none d-lg-block">
+                    <div class="header-top-lan-curr d-flex justify-content-end">
+                        <!-- Currency Start -->
+                      
+                        <!-- Currency End -->
+                        <!-- Language Start -->
+                        
+                                         
+                                    <!-- <div id="google_translate_element"></div> -->
+                       
+                        <!-- Language End -->
+
+                    </div>
+                </div>
+                <!-- Header Top Language Currency -->
+                <!-- Header Top responsive Action -->
+                <div class="col d-lg-none ">
+                    <div class="ec-header-bottons">
+                        <!-- Header User Start -->
+                        <div class="ec-header-user dropdown">
+                            <button class="dropdown-toggle" data-bs-toggle="dropdown"><i
+                                    class="fi-rr-user"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                
+                                <li><a href="/login">Login</a></li>
+                                <li><a href="/profile" >User Profile</a></li>
+                                <li><a href="/sign-up">Register</a></li>
+                                <li><a href="/logout">Logout</a></li>
+                            </ul>
+                        </div>
+                        <!-- Header User End -->
+                        <!-- Header Cart Start -->
+                        <!-- <a href="wishlist.html" class="ec-header-btn ec-header-wishlist">
+                            <div class="header-icon"><i class="fi-rr-heart"></i></div>
+                            <span class="ec-header-count">4</span>
+                        </a> -->
+                        <!-- Header Cart End -->
+                        <!-- Header Cart Start -->
+                        <a href="/cart" class="ec-header-btn">
+                            <div class="header-icon" ><i class="fi-rr-shopping-bag"></i></div>
+                            <!-- <span class="ec-header-count cart-count-lable"></span> -->
+                        
+                        </a>
+                        <!-- Header Cart End -->
+                        
+                        <!-- Header menu Start -->
+                        <a href="#ec-mobile-menu" class="ec-header-btn ec-side-toggle d-lg-none">
+                            <i class="fi fi-rr-menu-burger"></i>
+                        </a>
+                        <!-- Header menu End -->
+                    </div>
+                </div>
+                <!-- Header Top responsive Action -->
+            </div>
+        </div>
+    </div>
+    <!-- Ec Header Top  End -->
+    <!-- Ec Header Bottom  Start -->
+    <div class="ec-header-bottom d-none d-lg-block">
+        <div class="container position-relative">
+            <div class="row">
+                <div class="ec-flex">
+                    <!-- Ec Header Logo Start -->
+                    <div class="align-self-center">
+                        <div class="header-logo">
+                            <a href="/homePage">
+                                <img src="/assets/images/logo/LOGO DESIGN RED SHIFT _page-0001.jpg" alt="Site Logo" style="max-width: 100px; height: auto;" />
+                            </a>
+                        </div>
+                        
+                    </div>
+                    <!-- Ec Header Logo End -->
+
+                    <!-- Ec Header Search Start -->
+                    <div class="align-self-center">
+                        <div class="header-search">
+                            <form class="ec-btn-group-form" id="search-form" action="#">
+                                <input 
+                                    id="search-input" 
+                                    class="form-control ec-search-bar" 
+                                    placeholder="Search products..." 
+                                    type="text" 
+                                    autocomplete="off"
+                                >
+                                <button class="submit" type="button" style="margin-top: 1px;"><i class="fi-rr-search"></i></button>
+                            </form>
+                            <div id="search-results" class="search-dropdown" style="display: none;">
+                                <!-- Search results will be appended here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ec Header Search End -->
+
+                    <!-- Ec Header Button Start -->
+                    <div class="align-self-center">
+                        <div class="ec-header-bottons">
+
+                            <!-- Header User Start -->
+                            <div class="ec-header-user dropdown">
+                                <button class="dropdown-toggle" data-bs-toggle="dropdown">
+                                    <i class="fi-rr-user"></i>
+                                </button>
+                                <% if (isLoggedIn) { %>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a href="/profile" class="dropdown-item">User Profile</a></li>
+                                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                                    </ul>
+                                <% } else { %>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li><a class="dropdown-item" href="/login">Login</a></li>
+                                        <li><a class="dropdown-item" href="/sign-up">SignUp</a></li>
+                                    </ul>
+                                <% } %>
+                            </div>
+                            
+                            
+                            <!-- Header User End -->
+                            <!-- Header wishlist Start -->
+                            <!-- <a href="/wishlist" class="ec-header-btn ec-header-wishlist">
+                                <div class="header-icon"><i class="fi-rr-heart"></i></div>
+                                <span class="ec-header-count">4</span>
+                            </a> -->
+                            <!-- Header wishlist End -->
+                            <!-- Header Cart Start -->
+                            <a href="/cart" class="ec-header-btn ">
+                                <div class="header-icon" style="margin-top: 5px;"><i class="fi-rr-shopping-bag"></i></div>
+                                <!-- <span class="ec-header-count cart-count-label"></span> -->
+                            
+                            </a>
+                            
+                            <!-- Header Cart End -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ec Header Button End -->
+    <!-- Header responsive Bottom  Start -->
+    <div class="ec-header-bottom d-lg-none">
+        <div class="container position-relative">
+            <div class="row ">
+
+                <!-- Ec Header Logo Start -->
+                <div class="col">
+                    <div class="header-logo">
+                        <a href="/homePage"><img src="/assets/images/logo/LOGO DESIGN RED SHIFT _page-0001.jpg" alt="Site Logo" /><img
+                                class="dark-logo" src="/assets/images/logo/LOGO DESIGN RED SHIFT _page-0001.jpg" alt="Site Logo"
+                                style="display: none;" /></a>
+                    </div>
+                </div>
+                <!-- Ec Header Logo End -->
+                <!-- Ec Header Search Start -->
+                <div class="col">
+                    <div class="header-search">
+                        <form class="ec-btn-group-form" id="search-form" action="#">
+                            <input 
+                                id="search-input2" 
+                                class="form-control ec-search-bar" 
+                                placeholder="Search products..." 
+                                type="text" 
+                                autocomplete="off"
+                            >
+                            <button class="submit" type="button" style="margin-top: 1px;"><i class="fi-rr-search"></i></button>
+                        </form>
+                        <div id="search-results-small" class="search-dropdown" style="display: none;">
+                            <!-- Search results will be appended here dynamically -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Ec Header Search End -->
+            </div>
+        </div>
+    </div>
+    <!-- Header responsive Bottom  End -->
+    <!-- EC Main Menu Start -->
+    <div id="ec-main-menu-desk" class="d-none d-lg-block sticky-nav">
+        <div class="container position-relative">
+            <div class="row">
+                <div class="col-md-12 align-self-center">
+                    <div class="ec-main-menu">
+                        
+                        <ul>
+                            <li><a href="/homePage">Home</a></li>
+                           
+                            <li class="dropdown"><a href="/product-side">Products</a>
+                                
+                            </li>
+                            <li class="dropdown"><a href="javascript:void(0)">Pages</a>
+                                <ul class="sub-menu">
+                                    <!-- <li><a href="faq.html">FAQ</a></li> -->
+                                    <li><a href="/terms-condition">Terms Condition</a></li>
+                                    <li><a href="/privacy-policy">Privacy Policy</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/about-us">About Us</a></li>
+                            <li><a href="/contact-us">Contact Us</a></li>
+                            
+                            <li class="dropdown scroll-to"><a href="javascript:void(0)"><i
+                                        class="fi fi-rr-sort-amount-down-alt"></i></a>
+                                <ul class="sub-menu">
+                                    <li class="menu_title">Scroll To Section</li>
+                                    <li><a href="javascript:void(0)" data-scroll="collection" class="nav-scroll">Top
+                                            Collection</a></li>
+                                    <li><a href="javascript:void(0)" data-scroll="categories"
+                                            class="nav-scroll">Categories</a></li>
+                                    <li><a href="javascript:void(0)" data-scroll="offers"
+                                            class="nav-scroll">Offers</a></li>
+                                    <li><a href="javascript:void(0)" data-scroll="vendors" class="nav-scroll">Top
+                                            Vendors</a></li>
+                                    <li><a href="javascript:void(0)" data-scroll="services"
+                                            class="nav-scroll">Services</a></li>
+                                    <li><a href="javascript:void(0)" data-scroll="arrivals" class="nav-scroll">New
+                                            Arrivals</a></li>
+                                    <li><a href="javascript:void(0)" data-scroll="reviews" class="nav-scroll">Client
+                                            Review</a></li>
+                                    <li><a href="javascript:void(0)" data-scroll="insta"
+                                            class="nav-scroll">Instagram Feed</a></li>
+                                </ul>
+                            </li> 
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ec Main Menu End -->
+    <!-- ekka Mobile Menu Start -->
+    <div id="ec-mobile-menu" class="ec-side-cart ec-mobile-menu">
+        <div class="ec-menu-title">
+            <span class="menu_title">My Menu</span>
+            <button class="ec-close">×</button>
+        </div>
+        <div class="ec-menu-inner">
+            <div class="ec-menu-content">
+                <ul>
+                    <li><a href="/homePage">Home</a></li>
+                    <li><a href="/product-side">Products</a>
+                  
+
+                    <li><a href="javascript:void(0)">Pages</a>
+                        <ul class="sub-menu">
+                           
+                        
+                          
+                            <!-- <li><a href="faq.html">FAQ</a></li> -->
+        
+                            <li><a href="/terms-condition">Terms Condition</a></li>
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/about-us">About Us</a></li>
+                    <li><a href="/contact-us">Contact Us</a></li>
+                    
+                    </li>
+                    <!-- <li><a href="offer.html">Hot Offers</a></li> -->
+                </ul>
+            </div>
+
+
+            <!-- <div id="google_translate_element_2"></div> -->
+
+
+
+
+            <div class="header-res-lan-curr">
+                <div class="header-top-lan-curr">
+                    <!-- Language Start -->
+                     
+                    <div class="header-top-lan dropdown">
+                        <button class="dropdown-toggle text-upper" data-bs-toggle="dropdown">Language <i
+                                class="ecicon eci-caret-down" aria-hidden="true"></i></button>
+                        <ul class="dropdown-menu">
+                            <li class="active"><a class="dropdown-item" href="#">English</a></li>
+                            <li><a class="dropdown-item" href="#">Italiano</a></li>
+                        </ul>
+                    </div>
+                    <!-- Language End -->
+                    <!-- Currency Start -->
+                    <div class="header-top-curr dropdown">
+                        <button class="dropdown-toggle text-upper" data-bs-toggle="dropdown">Currency <i
+                                class="ecicon eci-caret-down" aria-hidden="true"></i></button>
+                        <ul class="dropdown-menu">
+                            <li class="active"><a class="dropdown-item" href="#">USD $</a></li>
+                            <li><a class="dropdown-item" href="#">EUR €</a></li>
+                        </ul>
+                    </div>
+                    <!-- Currency End -->
+                </div>
+
+              
+
+                <!-- Social Start -->
+                <div class="header-res-social">
+                    <div class="header-top-social">
+                        <ul class="mb-0">
+                            <li class="list-inline-item"><a class="hdr-facebook" href="#"><i
+                                        class="ecicon eci-facebook"></i></a></li>
+                            <li class="list-inline-item"><a class="hdr-twitter" href="#"><i
+                                        class="ecicon eci-twitter"></i></a></li>
+                            <li class="list-inline-item"><a class="hdr-instagram" href="#"><i
+                                        class="ecicon eci-instagram"></i></a></li>
+                            <li class="list-inline-item"><a class="hdr-linkedin" href="#"><i
+                                        class="ecicon eci-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Social End -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- ekka mobile Menu End -->
+</header>
+
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement(
+            {pageLanguage: 'en'},
+            'google_translate_element'
+        );
+        new google.translate.TranslateElement(
+            {pageLanguage: 'en'},
+            'google_translate_element_2'
+        );
+    }
+
+
+
+
+
+    document.getElementById('search-input').addEventListener('input', async (e) => {
+    const searchTerm = e.target.value;
+
+    if (searchTerm.trim() === '') {
+        document.getElementById('search-results').style.display = 'none';
+        document.getElementById('search-results').innerHTML = '';
+        return;
+    }
+
+    try {
+        const response = await fetch(`/search?searchTerm=${encodeURIComponent(searchTerm)}`);
+        const data = await response.json();
+
+        if (response.ok && data.products) {
+            const resultsDiv = document.getElementById('search-results');
+            resultsDiv.style.display = 'block';
+
+            // Render the results with ID and redirect functionality
+            resultsDiv.innerHTML = data.products.map(product => `
+    <div onclick="redirectToProductDetails('${product.product_id}')" style="cursor: pointer; margin-bottom: 10px;">
+        <img src="${product.image_url}" alt="${product.product_name}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
+        <span>${product.product_name} </span>
+    </div>
+`).join('');
+
+        } else {
+            document.getElementById('search-results').style.display = 'none';
+        }
+    } catch (error) {
+        console.error('Error fetching search results:', error);
+    }
+});
+
+
+
+
+
+
+document.getElementById('search-input2').addEventListener('input', async (e) => {
+    const searchTerm = e.target.value;
+    const resultsDiv = document.getElementById('search-results-small');
+
+    if (searchTerm.trim() === '') {
+        resultsDiv.style.display = 'none';
+        resultsDiv.innerHTML = '';
+        return;
+    }
+
+    try {
+        const response = await fetch(`/search?searchTerm=${encodeURIComponent(searchTerm)}`);
+        const data = await response.json();
+
+        if (response.ok && data.products) {
+            resultsDiv.style.display = 'block';
+
+            resultsDiv.innerHTML = data.products.map(product => `
+                <div onclick="redirectToProductDetails('${product.product_id}')" style="cursor: pointer; margin-bottom: 10px;">
+                    <img src="${product.image_url}" alt="${product.product_name}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">
+                    <span>${product.product_name}</span>
+                </div>
+            `).join('');
+        } else {
+            resultsDiv.style.display = 'none';
+        }
+    } catch (error) {
+        console.error('Error fetching search results:', error);
+    }
+});
+
+
+// Redirect to the product details page
+function redirectToProductDetails(productId) {
+    window.location.href = `/product-single/${productId}`;
+}
+
+
+
+
+
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // This flag will be available from the EJS template (passed by the backend)
+        const isLoggedIn = '<%= isLoggedIn %>';
+
+        const userMenu = document.getElementById('userMenu');
+        
+        // Elements to show/hide based on login status
+        const loginItem = userMenu.querySelector('a[href="/login"]');
+        const signUpItem = userMenu.querySelector('a[href="/sign-up"]');
+        const profileItem = userMenu.querySelector('a[href="/profile"]');
+        const logoutItem = userMenu.querySelector('a[href="/logout"]');
+
+        // Adjust the visibility based on the login status
+        if (isLoggedIn) {
+            // Show Profile and Logout, hide Login and SignUp
+            loginItem.parentElement.style.display = 'none';
+            signUpItem.parentElement.style.display = 'none';
+        } else {
+            // Show Login and SignUp, hide Profile and Logout
+            profileItem.parentElement.style.display = 'none';
+            logoutItem.parentElement.style.display = 'none';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

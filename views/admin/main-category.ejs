@@ -1,0 +1,187 @@
+
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+	<!-- WRAPPER -->
+	<div class="wrapper">
+
+		<!-- LEFT MAIN SIDEBAR -->
+		<%-include('../partials/adminsidenav' )%>
+		<!-- PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<%-include('../partials/adminHeader' )%>
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper breadcrumb-wrapper-2 breadcrumb-contacts">
+						<h1> Category</h1>
+						<p class="breadcrumbs"><span><a href="/admin/home">Home</a></span>
+							<span><i class="mdi mdi-chevron-right"></i></span>  Category</p>
+					</div>
+					<div class="row">
+                        <!-- Add New Category -->
+                        <div class="col-xl-4 col-lg-12">
+                            <div class="ec-cat-list card card-default mb-24px">
+                                <div class="card-body">
+                                    <div class="ec-cat-form">
+                                        <h4>Add New Category</h4>
+                                        <% if (messages.success) { %>
+                                            <div class="alert alert-success" role="alert">
+                                                <%= messages.success %>
+                                            </div>
+                                        <% } %>
+                
+                                        <% if (messages.error) { %>
+                                            <div class="alert alert-danger" role="alert">
+                                                <%= messages.error %>
+                                            </div>
+                                        <% } %>
+                
+                                        <form action="/admin/add-category" id="addCategoryForm" method="POST" enctype="multipart/form-data">
+                                            <div class="form-group row">
+                                                <label for="categoryName" class="col-12 col-form-label">Main Category Name</label>
+                                                <div class="col-12">
+                                                    <input id="categoryName" name="categoryName" class="form-control" type="text" required >
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="form-group row">
+                                                <label for="categoryImage" class="col-12 col-form-label">Image</label>
+                                                <div class="col-12">
+                                                    <input id="categoryImage" name="categoryImage" class="form-control" type="file" style="width: auto; height: 50px;" required>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="categoryDescription" class="col-12 col-form-label">Description</label>
+                                                <div class="col-12">
+                                                    <textarea id="categoryDescription" name="categoryDescription" cols="40" rows="4" class="form-control" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <button id="addCategoryButton" type="submit" class="btn btn-primary">Add Category</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <!-- Show Categories -->
+                        <div class="col-xl-8 col-lg-12">
+                            <div class="ec-cat-list card card-default">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="categoryTable" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Category Name</th>
+                                                    <th>Image</th>
+                                                    <th>Description</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <!-- <tbody id="categoryTableBody"> -->
+                                                <tbody>
+                                                    <% if (categories.length > 0) { %>
+                                                        <% categories.forEach(category => { %>
+                                                            <tr>
+                                                                <td><%= category.categoryName || 'No name provided' %></td>
+                                                                <td>
+                                                                    <% if (category.categoryImage) { %>
+                                                                        <img src="/uploads/<%= category.categoryImage %>" alt="<%= category.categoryName %> Image" style="width: auto; height: 45px;">
+                                                                    <% } else { %>
+                                                                        <span>No image available</span>
+                                                                    <% } %>
+                                                                </td>
+                                                                <td><%= category.categoryDescription || 'No description provided' %></td>
+                                                                <td>
+                                                                    <form action="/admin/categories/<%= category.id %>" method="POST" style="display: inline;" onsubmit="return confirmDelete();">
+                                                                        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>
+                                                        <% }) %>
+                                                    <% } else { %>
+                                                        <tr>
+                                                            <td colspan="4" class="text-center">No categories found</td>
+                                                        </tr>
+                                                    <% } %>
+                                                </tbody>
+                                                
+                                            <!-- </tbody> -->
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+			<!-- Footer -->
+            <%-include('../partials/adminFooter' )%>
+
+		</div> <!-- End Page Wrapper -->
+
+	</div> <!-- End Wrapper -->
+
+	<!-- Common Javascript -->
+
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Show success toast for removed item
+    if (urlParams.get('deleted') === 'true') {
+        if (typeof Swal !== "undefined") { // Ensure Swal is loaded
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Category deleted successfully!',
+                showConfirmButton: false,
+                timer: 3000
+            });
+
+            // Optionally remove the query parameter from the URL
+            const newUrl = window.location.origin + window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+        } else {
+            console.error("SweetAlert is not loaded on this page.");
+        }
+    }
+
+    // Show success toast for added item
+    if (urlParams.get('success') === 'true') {
+        if (typeof Swal !== "undefined") { // Ensure Swal is loaded
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Category added successfully!',
+                showConfirmButton: false,
+                timer: 3000
+            });
+        } else {
+            console.error("SweetAlert is not loaded on this page.");
+        }
+    }
+});
+
+</script>
+
+
+
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this Category?");
+    }
+</script>
+</html>

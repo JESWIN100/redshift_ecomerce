@@ -1,0 +1,42 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+logs/
+
+# Build output
+/dist
+/build
+
+# Coverage reports
+/coverage
+
+# Dependency directory
+bower_components/
+
+# Debug and IDE files
+.vscode/
+.idea/
+
+# NPM and Yarn debug files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Test reports
+/test-results/
+
+# PM2 log files
+pids/
+logs/
+
+# Docker files
+docker-compose.override.yml

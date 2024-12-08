@@ -1,0 +1,425 @@
+
+
+<body>
+    <div id="ec-overlay">
+        <div class="ec-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- Header start  -->
+    <%-include('../partials/userHeader' )%>
+    <!-- Header End  -->
+
+    <!-- ekka Cart Start -->
+    <div class="ec-side-cart-overlay"></div>
+
+    <!-- Main Slider Start -->
+    <div class="sticky-header-next-sec ec-main-slider section section-space-pb">
+        <div class="ec-slider swiper-container main-slider-nav main-slider-dot">
+            <!-- Main slider -->
+            <div class="swiper-wrapper">
+                <div class="ec-slide-item swiper-slide d-flex ec-slide-1">
+                    <div class="container align-self-center">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-7 col-md-7 col-sm-7 align-self-center">
+                                <div class="ec-slide-content slider-animation">
+                                    <h1 class="ec-slide-title" style="color: #fff;">Premium Spices Collection</h1>
+                                    <h2 class="ec-slide-stitle" style="color: #fff;">Fresh & Authentic</h2>
+                                    <p style="color: #fff;">Discover a world of flavors with our handpicked spices from around the globe. Perfect for every dish!</p>
+                                    <!-- <a href="#" class="btn btn-lg btn-secondary">Order Now</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ec-slide-item swiper-slide d-flex ec-slide-2">
+                    <div class="container align-self-center">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-7 col-md-7 col-sm-7 align-self-center">
+                                <div class="ec-slide-content slider-animation">
+                                    <h1 class="ec-slide-title" style="color: #fff;">Gourmet Spice Blends</h1>
+                                    <h2 class="ec-slide-stitle" style="color: #fff;">Perfect for Every Recipe</h2>
+                                    <p style="color: #fff;">Elevate your cooking with our expertly crafted spice blends. A touch of gourmet in every meal.</p>
+                                    <!-- <a href="#" class="btn btn-lg btn-secondary">Shop Now</a> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="swiper-pagination swiper-pagination-white"></div>
+            <div class="swiper-buttons">
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Main Slider End -->
+
+    <!-- Product tab Area Start -->
+    <section class="section ec-product-tab section-space-p" id="collection">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <h2 class="ec-bg-title">Our Top Collection</h2>
+                        <h2 class="ec-title">Our Top Collection</h2>
+                        <p class="sub-title">Browse The Collection of Top Products</p>
+                    </div>
+                </div>
+
+            
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="tab-content">
+                        <!-- 1st Product tab start -->
+                        <div class="tab-pane fade show active" id="tab-pro-for-all">
+                            <div class="row">
+                                <% products.reverse().forEach(function(product) { %>
+                                  <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mb-6 ec-product-content" data-animation="fadeIn">
+                                    <div class="ec-product-inner">
+                                      <div class="ec-pro-image-outer">
+                                        <div class="ec-pro-image">
+                                          <a href="/product-single/<%= product.product_id %>" class="image">
+                                            <img class="main-image" src="<%= product.image_url %>" alt="Product" onclick="window.location.href='/product-single/<%= product.product_id %>'" />
+                                            <img class="hover-image" src="<%= product.image_url %>" alt="Product" onclick="window.location.href='/product-single/<%= product.product_id %>'" />
+                                          </a>
+                                          <% if (product.percentage !== "0%") { %>
+                                            <span class="percentage"><%= product.percentage %></span>
+                                          <% } %>
+                                          
+                                          <div class="ec-pro-actions">
+                
+                    
+                                        
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="ec-pro-content">
+                                        <h5 class="ec-pro-title"><a href="/product-single/<%= product.product_id %>"><%= product.product_name %></a></h5>
+                                        
+                                        <span class="ec-price">
+                                          <!-- <span class="old-price"><%= product.price %></span> -->
+                                          <span class="new-price">AED <%= product.price %></span>
+                                        </span>
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                <% }); %>
+                                <div class="col-sm-12 shop-all-btn">
+                                    <div class="ec-bg-swipe">
+                                        <!-- Make sure the button is linked properly -->
+                                        <a href="/product-side" class="ec-btn-bg-swipe">
+                                            <span class="circle" aria-hidden="true">
+                                                <span class="icon arrow"></span>
+                                            </span>
+                                            <span class="button-text">Load More</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                              </div>
+                              
+                        </div>
+                      
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ec Product tab Area End -->
+
+   
+
+    <!--  Category Section Start -->
+    <section class="section ec-category-section section-space-p" id="categories">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <h2 class="ec-bg-title">Our Top Collection</h2>
+                        <h2 class="ec-title">Top Categories</h2>
+                        <p class="sub-title">Browse The Collection of Top Categories</p>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row">
+                <!--Category Nav Start -->
+                <div class="col-lg-3">
+                    <ul class="ec-cat-tab-nav nav">
+                        <% categories.forEach((category, index) => { %>
+                            <li class="cat-item">
+                                <a class="cat-link <%= index === 0 ? 'active' : '' %>" data-bs-toggle="tab" href="#tab-cat-<%= index + 1 %>">
+                                    <div class="cat-icons">
+                                        <img class="cat-icon" src="/uploads/<%= category.categoryImage %>" alt="<%= category.categoryName %>">
+                                        <img class="cat-icon-hover" src="/uploads/<%= category.categoryImage %>" alt="<%= category.categoryName %>">
+                                    </div>
+                                    <div class="cat-desc">
+                                        <span><%= category.categoryName %></span>
+                                        
+                                    </div>
+                                </a>
+                            </li>
+                        <% }); %>
+                    </ul>
+                </div>
+                <!-- Category Nav End -->
+    
+                <!--Category Tab Start -->
+                <div class="col-lg-9">
+                    <div class="tab-content">
+                        <% categories.forEach((category, index) => { %>
+                            <div class="tab-pane fade <%= index === 0 ? 'show active' : '' %>" id="tab-cat-<%= index + 1 %>">
+                                <div class="row">
+                                    <img src="/uploads/<%= category.categoryImage %>" alt="<%= category.categoryName %>" />
+                                </div>
+                                <span class="panel-overlay">
+                                    <!-- <a href="shop-left-sidebar-col-3.html" class="btn btn-primary">View All</a> -->
+                                </span>
+                            </div>
+                        <% }); %>
+                    </div>
+                </div>
+                <!-- Category Tab End -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Category Section End -->
+
+    
+    <!-- Feature & Special Section End -->
+
+    <!--  Top Vendor Section Start -->
+   
+    <!--  Top Vendor Section End -->
+
+    <!--  services Section Start -->
+    <section class="section ec-services-section section-space-p" id="services">
+        <h2 class="d-none">Services</h2>
+        <div class="container">
+            <div class="row">
+                <div class="ec_ser_content ec_ser_content_1 col-sm-12 col-md-6 col-lg-3" data-animation="zoomIn">
+                    <div class="ec_ser_inner">
+                        <div class="ec-service-image">
+                            <i class="fi fi-ts-truck-moving"></i>
+                        </div>
+                        <div class="ec-service-desc">
+                            <h2>Free Shipping</h2>
+                            <p>Free shipping on all US order or order above AED 200</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ec_ser_content ec_ser_content_2 col-sm-12 col-md-6 col-lg-3" data-animation="zoomIn">
+                    <div class="ec_ser_inner">
+                        <div class="ec-service-image">
+                            <i class="fi fi-ts-hand-holding-seeding"></i>
+                        </div>
+                        <div class="ec-service-desc">
+                            <h2>24X7 Support</h2>
+                            <p>Contact us 24 hours a day, 7 days a week</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ec_ser_content ec_ser_content_3 col-sm-12 col-md-6 col-lg-3" data-animation="zoomIn">
+                    <div class="ec_ser_inner">
+                        <div class="ec-service-image">
+                            <i class="fi fi-ts-badge-percent"></i>
+                        </div>
+                        <div class="ec-service-desc">
+                            <h2>30 Days Return</h2>
+                            <p>Simply return it within 30 days for an exchange</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="ec_ser_content ec_ser_content_4 col-sm-12 col-md-6 col-lg-3" data-animation="zoomIn">
+                    <div class="ec_ser_inner">
+                        <div class="ec-service-image">
+                            <i class="fi fi-ts-donate"></i>
+                        </div>
+                        <div class="ec-service-desc">
+                            <h2>Payment Secure</h2>
+                            <p>Contact us 24 hours a day, 7 days a week</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--services Section End -->
+
+    <!--  offer Section Start -->
+    <section class="section ec-offer-section section-space-p section-space-m">
+        <h2 class="d-none">Offer</h2>
+        <div class="container">
+            <div class="row justify-content-end">
+                <div class="col-xl-6 col-lg-7 col-md-7 col-sm-7 align-self-center ec-offer-content">
+                    <h2 class="ec-offer-title" style="color: #fff;">Cadamom</h2>
+                    <h3 class="ec-offer-stitle" data-animation="slideInDown" style="color: #fff;">Super Offer</h3>
+                    <!-- <span class="ec-offer-img" data-animation="zoomIn"><img src="assets/images/offer-image/1.png"
+                            alt="offer image" /></span> -->
+                    
+                    <a class="btn btn-primary"  href="/product-side" data-animation="zoomIn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- offer Section End -->
+
+    <!-- New Product Start -->
+
+
+   
+
+
+  
+
+    <!-- Footer Start -->
+    <%-include('../partials/userFooter' )%>
+    <!-- Footer Area End -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="ec_quickview_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close qty_close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12">
+                            <!-- Swiper -->
+                            <div class="qty-product-cover">
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_1.jpg" alt="">
+                                </div>
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_2.jpg" alt="">
+                                </div>
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_3.jpg" alt="">
+                                </div>
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_4.jpg" alt="">
+                                </div>
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_5.jpg" alt="">
+                                </div>
+                            </div>
+                            <div class="qty-nav-thumb">
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_1.jpg" alt="">
+                                </div>
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_2.jpg" alt="">
+                                </div>
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_3.jpg" alt="">
+                                </div>
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_4.jpg" alt="">
+                                </div>
+                                <div class="qty-slide">
+                                    <img class="img-responsive" src="assets/images/product-image/3_5.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-12 col-xs-12">
+                            <div class="quickview-pro-content">
+                                <h5 class="ec-quick-title"><a href="product-left-sidebar.html">Handbag leather purse for
+                                        women</a>
+                                </h5>
+                                <div class="ec-quickview-rating">
+                                    <i class="ecicon eci-star fill"></i>
+                                    <i class="ecicon eci-star fill"></i>
+                                    <i class="ecicon eci-star fill"></i>
+                                    <i class="ecicon eci-star fill"></i>
+                                    <i class="ecicon eci-star"></i>
+                                </div>
+
+                                <div class="ec-quickview-desc">Lorem Ipsum is simply dummy text of the printing and
+                                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
+                                    since the 1500s,</div>
+                                <div class="ec-quickview-price">
+                                    <span class="old-price">$100.00</span>
+                                    <span class="new-price">$80.00</span>
+                                </div>
+
+                                <div class="ec-pro-variation">
+                                    <div class="ec-pro-variation-inner ec-pro-variation-color">
+                                        <span>Color</span>
+                                        <div class="ec-pro-color">
+                                            <ul class="ec-opt-swatch">
+                                                <li><span style="background-color:#ebbf60;"></span></li>
+                                                <li><span style="background-color:#75e3ff;"></span></li>
+                                                <li><span style="background-color:#11f7d8;"></span></li>
+                                                <li><span style="background-color:#acff7c;"></span></li>
+                                                <li><span style="background-color:#e996fa;"></span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="ec-pro-variation-inner ec-pro-variation-size ec-pro-size">
+                                        <span>Size</span>
+                                        <div class="ec-pro-variation-content">
+                                            <ul class="ec-opt-size">
+                                                <li class="active"><a href="#" class="ec-opt-sz"
+                                                        data-tooltip="Small">S</a></li>
+                                                <li><a href="#" class="ec-opt-sz" data-tooltip="Medium">M</a></li>
+                                                <li><a href="#" class="ec-opt-sz" data-tooltip="Large">X</a></li>
+                                                <li><a href="#" class="ec-opt-sz" data-tooltip="Extra Large">XL</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ec-quickview-qty">
+                                    <div class="qty-plus-minus">
+                                        <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
+                                    </div>
+                                    <div class="ec-quickview-cart ">
+                                        <button class="btn btn-primary"><i class="fi-rr-shopping-basket"></i> Add To Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal end -->
+
+   
+
+    
+
+
+
+
+    <!-- Whatsapp -->
+    <div class="ec-style ec-right-bottom">
+
+        <!--/ End Floating Panel Container -->
+        <!-- Start Right Floating Button-->
+        <div class="ec-right-bottom">
+            <div class="ec-box">
+              
+            </div>
+        </div>
+        <!--/ End Right Floating Button-->
+    </div>
+    <!-- Whatsapp end -->
+
+    <!-- Feature tools -->
+   
+
+    <!-- Vendor JS -->
+ 
+</body>
+
+</html>

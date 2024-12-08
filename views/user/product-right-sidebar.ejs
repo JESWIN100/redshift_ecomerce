@@ -1,0 +1,623 @@
+<style>
+
+
+
+.zoom-image-hover:hover {
+    transform: scale(1.05); /* Optional: Slight zoom effect on hover */
+    transition: transform 0.3s ease;
+}
+
+
+.ec-t-review-rating i {
+        font-size: 24px;
+        cursor: pointer;
+        color: #ccc; /* Default star color */
+        transition: color 0.2s ease-in-out;
+    }
+
+    .ec-t-review-rating i.fill {
+        color: #ffcc00; /* Filled star color */
+    }
+
+</style>
+<body class="product_page">
+    
+
+    <!-- Header start  -->
+    <%-include('../partials/userHeader' )%>
+    <!-- Header End  -->
+
+    <!-- ekka Cart Start -->
+   
+   
+    <!-- ekka Cart End -->
+
+    <!-- Ec breadcrumb start -->
+    <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row ec_breadcrumb_inner">
+                        <div class="col-md-6 col-sm-12">
+                            <h2 class="ec-breadcrumb-title">Single Products</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <!-- ec-breadcrumb-list start -->
+                            <ul class="ec-breadcrumb-list">
+                                <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="ec-breadcrumb-item active">Products</li>
+                            </ul>
+                            <!-- ec-breadcrumb-list end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ec breadcrumb end -->
+
+    <!-- Sart Single product -->
+    <section class="ec-page-content section-space-p  ">
+        <div class="container ">
+            <div class="row d-flex justify-content-center">
+                <div class="ec-pro-rightside ec-common-rightside col-lg-9 col-md-12 ">
+
+                    <!-- Single product content Start -->
+                    <div class="single-pro-block">
+                        <div class="single-pro-inner">
+                            <div class="row">
+                                <div class="single-pro-img">
+                                    <div class="single-product-scroll">
+                                        <div class="single-product-cover">
+                                            <% images.forEach((image, index) => { %>
+                                                <div class="single-slide zoom-image-hover">
+                                                    <img class="img-fixed" src="<%= image %>" alt="Product Image <%= index + 1 %>">
+                                                </div>
+                                            <% }); %>
+                                        </div>
+                                        <div class="single-nav-thumb">
+                                            <% images.forEach((image, index) => { %>
+                                                <div class="single-slide">
+                                                    <img class="img-fixed-thumb" src="<%= image %>" alt="Thumbnail <%= index + 1 %>">
+                                                </div>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="single-pro-desc">
+                                    <div class="single-pro-content">
+                                        <h5 class="ec-single-title"><%= product.product_name %></h5>
+                                        <div class="ec-single-rating-wrap">
+                                            <div class="ec-single-rating">
+                                                <% 
+                                                    const fullStars = Math.floor(averageRating); // Number of full stars
+                                                    const halfStar = (averageRating % 1 >= 0.5) ? true : false; // Check for half star
+                                                    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0); // Remaining empty stars
+                                                %>
+                                                
+                                                <!-- Render full stars -->
+                                                <% for (let i = 0; i < fullStars; i++) { %>
+                                                    <i class="ecicon eci-star fill"></i>
+                                                <% } %>
+                                                
+                                                <!-- Render half star -->
+                                                <% if (halfStar) { %>
+                                                    <i class="ecicon eci-star-half fill"></i>
+                                                <% } %>
+                                                
+                                                <!-- Render empty stars -->
+                                                <% for (let i = 0; i < emptyStars; i++) { %>
+                                                    <i class="ecicon eci-star-o"></i>
+                                                <% } %>
+                                            </div>
+                                            
+                                            <span class="ec-read-review">
+                                                <a href="#ec-spt-nav-review">Be the first to review this product</a>
+                                            </span>
+                                        </div>
+                                        <div class="ec-single-desc"><%= product.description %></div>
+                            
+                                        <div class="ec-single-price-stoke">
+                                            <div class="ec-single-price">
+                                                <span class="ec-single-ps-title">As low as</span>
+                                                <span class="new-price">AED <%= product.price %></span>
+                                            </div>
+                                        </div>
+                            
+                                        <div class="ec-single-qty">
+                                           
+                                            <div class="ec-single-cart">
+                                                <button
+  title="Add To Cart"
+  class="add-to-cart btn btn-primary"
+  data-product-id="<%= product.product_id %>"
+  data-product-name="<%= product.product_name %>"
+  data-product-price="<%= product.price %>"
+  data-product-image="<%= images[0] %>"
+>
+  <i class="fi-rr-shopping-basket" ></i> Add To Cart
+</button>
+
+                                            </div>
+                                        
+                                            <div class="ec-single-quickview">
+                                                <a href="#" class="ec-btn-group quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal">
+                                                    <i class="fi-rr-eye"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!--Single product content End -->
+                    <!-- Single product tab start -->
+                    <div class="ec-single-pro-tab">
+                        <div class="ec-single-pro-tab-wrapper">
+                            <div class="ec-single-pro-tab-nav">
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab"
+                                            data-bs-target="#ec-spt-nav-details" role="tab" aria-controls="ec-spt-nav-details" aria-selected="true">Detail</a>
+                                    </li>
+                                    <!-- <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-info"
+                                             role="tab" aria-controls="ec-spt-nav-info" aria-selected="false">More Information</a>
+                                    </li> -->
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#ec-spt-nav-review"
+                                             role="tab" aria-controls="ec-spt-nav-review" aria-selected="false">Reviews</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-content  ec-single-pro-tab-content">
+                                <div id="ec-spt-nav-details" class="tab-pane fade show active">
+                                    <div class="ec-single-pro-tab-desc">
+                                        <p><%= product.description %>.
+                                        </p>
+                                        
+                                    </div>
+                                </div>
+                                <div id="ec-spt-nav-info" class="tab-pane fade">
+                                    <div class="ec-single-pro-tab-moreinfo">
+                                        <ul>
+                                            <li><span>Weight</span> 1000 g</li>
+                                            <li><span>Dimensions</span> 35 × 30 × 7 cm</li>
+                                            <li><span>Color</span> Black, Pink, Red, White</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div id="ec-spt-nav-review" class="tab-pane fade">
+                                    <div class="row">
+                                        <div class="ec-t-review-wrapper">
+                                            <% if (filteredReviews && filteredReviews.length > 0) { %>
+                                                <% filteredReviews.forEach(review => { %>
+                                                    <div class="ec-t-review-item">
+                                                        <div class="ec-t-review-avtar">
+                                                            <img  src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small_2x/user-profile-icon-free-vector.jpg" alt="" />
+                                                        </div>
+                                                        <div class="ec-t-review-content">
+                                                            <div class="ec-t-review-top">
+                                                                <div class="ec-t-review-name"><%= review.name %></div>
+                                                                <div class="ec-t-review-rating">
+                                                                    <% for (let i = 1; i <= 5; i++) { %>
+                                                                        <% if (i <= review.rating) { %>
+                                                                            <i class="ecicon eci-star fill"></i>
+                                                                        <% } else { %>
+                                                                            <i class="ecicon eci-star-o"></i>
+                                                                        <% } %>
+                                                                    <% } %>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ec-t-review-bottom">
+                                                                <p><%= review.comment %></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% }); %>
+                                            <% } else { %>
+                                                <p>No reviews available for this product.</p>
+                                            <% } %>
+                                        </div>
+                                        
+                                        <div class="ec-ratting-content">
+                                            <h3>Add a Review</h3>
+                                            <div class="ec-ratting-form">
+                                                <form action="/add-review" method="POST">
+                                                    <div class="ec-ratting-star">
+                                                        <span>Your rating:</span>
+                                                        <div class="ec-t-review-rating" id="starRating">
+                                                            <!-- Stars -->
+                                                            <i class="ecicon eci-star" data-value="1"></i>
+                                                            <i class="ecicon eci-star" data-value="2"></i>
+                                                            <i class="ecicon eci-star" data-value="3"></i>
+                                                            <i class="ecicon eci-star" data-value="4"></i>
+                                                            <i class="ecicon eci-star" data-value="5"></i>
+                                                        </div>
+                                                        <!-- Hidden input to store selected rating -->
+                                                        <input type="hidden" name="rating" id="selectedRating" required />
+                                                    </div>
+                                                    <input name="productName" value="<%= product.product_id %>:<%= product.product_name %>"  type="hidden" required />
+                                                    <div class="ec-ratting-input form-submit">
+                                                        <textarea name="comment" placeholder="Enter Your Comment"></textarea>
+                                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                                    </div>
+                                                </form>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- product details description area end -->
+                </div>
+                <!-- Sidebar Area Start -->
+               
+                <!-- Sidebar Area Start -->
+            </div>
+        </div>
+    </section>
+    <!-- End Single product -->
+
+    <!-- Related Product Start -->
+    <section class="section ec-related-product section-space-p">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="section-title">
+                    <h2 class="ec-bg-title">Related products</h2>
+                    <h2 class="ec-title">Related products</h2>
+                    <p class="sub-title">Browse The Collection of Top Products</p>
+                </div>
+            </div>
+        </div>
+        <div class="row margin-minus-b-30">
+            <% if (Relatedproducts && Relatedproducts.length > 0) { %>
+                <% Relatedproducts.forEach(product => { %>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6 mb-6 pro-gl-content">
+                        <div class="ec-product-inner">
+                            <div class="ec-pro-image-outer">
+                                <div class="ec-pro-image">
+                                    <a href="/product-single/<%= product.product_id %>" class="image">
+                                        <img class="img-fixed" src="<%= product.image_url %>" alt="<%= product.product_name %>" />
+                                        <img class="hover-image" src="<%= product.image_url %>" alt="<%= product.product_name %>" />
+                                    </a>
+                                    <% if (product.discount) { %>
+                                        <span class="percentage"><%= product.discount %>%</span>
+                                    <% } %>
+                                    <!-- <a href="#" class="quickview" data-link-action="quickview" title="Quick view" data-bs-toggle="modal" data-bs-target="#ec_quickview_modal"><i class="fi-rr-eye"></i></a> -->
+                                    <div class="ec-pro-actions">
+                                        <!-- <a  class="ec-btn-group compare" title="Compare"><i class="fi fi-rr-arrows-repeat"></i></a> -->
+                                        <button
+                                        title="Add To Cart"
+                                        class="add-to-cart btn btn-primary"
+                                        data-product-id="<%= product.product_id %>"
+                                        data-product-name="<%= product.product_name %>"
+                                        data-product-price="<%= product.price %>"
+                                        data-product-image="<%= images[0] %>"
+                                      >
+                                        <i class="fi-rr-shopping-basket"></i> Add To Cart
+                                      </button>
+
+                                        <!-- <a class="ec-btn-group wishlist" title="Wishlist"><i class="fi-rr-heart"></i></a> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ec-pro-content">
+                                <h5 class="ec-pro-title"><a href="/product-single/<%= product.product_id %>"><%= product.product_name %></a></h5>
+                               
+                                <div class="ec-price">
+                                    <% if (product.old_price) { %>
+                                        <span class="old-price">$<%= product.old_price %></span>
+                                    <% } %>
+                                    <span class="new-price">AED <%= product.price %></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            <% } else { %>
+                <p class="text-center">No related products found.</p>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+    <!-- Related Product end -->
+
+    <!-- Footer Start -->
+    <%-include('../partials/userFooter' )%>
+    <!-- Footer Area End -->
+
+    <!-- Modal -->
+   <div class="modal fade" id="ec_quickview_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="btn-close qty_close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-5 col-sm-12 col-xs-12">
+                        <!-- Swiper -->
+                        <div class="qty-product-cover">
+                            <% if (images.length > 0) { %>
+                                <div class="single-product-cover">
+                                    <% images.forEach((image, index) => { %>
+                                        <div class="single-slide zoom-image-hover">
+                                            <img class="img-fixed" src="<%= image %>" alt="Product Image <%= index + 1 %>">
+                                        </div>
+                                    <% }); %>
+                                </div>
+                                <div class="single-nav-thumb">
+                                    <% images.forEach((image, index) => { %>
+                                        <div class="single-slide">
+                                            <img class="img-fixed-thumb" src="<%= image %>" alt="Thumbnail <%= index + 1 %>">
+                                        </div>
+                                    <% }); %>
+                                </div>
+                            <% } else { %>
+                                <p class="no-image-message">No images available for this product.</p>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="quickview-pro-content">
+                            <h5 class="ec-quick-title">
+                                <a href="/product-single/<%= product.product_id %>"><%= product.product_name %></a>
+                            </h5>
+                            <div class="ec-single-rating">
+                                <% 
+                                    const fullStarseses = Math.floor(averageRating);
+                                    const halfStareses = (averageRating % 1 >= 0.5) ? true : false;
+                                    const emptyStarseses = 5 - fullStarseses - (halfStareses ? 1 : 0);
+                                %>
+                                <% for (let i = 0; i < fullStarseses; i++) { %>
+                                    <i class="ecicon eci-star fill"></i>
+                                <% } %>
+                                <% if (halfStareses) { %>
+                                    <i class="ecicon eci-star-half fill"></i>
+                                <% } %>
+                                <% for (let i = 0; i < emptyStarseses; i++) { %>
+                                    <i class="ecicon eci-star-o"></i>
+                                <% } %>
+                            </div>
+                            <div class="ec-quickview-desc"><%= product.description %></div>
+                            <div class="ec-quickview-price">
+                                <span class="new-price">AED <%= product.price %></span>
+                            </div>
+                            <div class="ec-quickview-qty">
+                                <div class="ec-quickview-cart">
+                                    <button
+                                        title="Add To Cart"
+                                        class="add-to-cart btn btn-primary"
+                                        data-product-id="<%= product.product_id %>"
+                                        data-product-name="<%= product.product_name %>"
+                                        data-product-price="<%= product.price %>"
+                                        data-product-image="<%= images[0] %>"
+                                    >
+                                        <i class="fi-rr-shopping-basket"></i> Add To Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <!-- Whatsapp -->
+    <div class="ec-style ec-right-bottom">
+     
+        <!--/ End Floating Panel Container -->
+        <!-- Start Right Floating Button-->
+        <div class="ec-right-bottom">
+            <div class="ec-box">
+                
+            </div>
+        </div>
+        <!--/ End Right Floating Button-->
+    </div>
+    <!-- Whatsapp end -->
+
+    <!-- Feature tools -->
+    
+  
+
+    <!-- Vendor JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const stars = document.querySelectorAll("#starRating i");
+            const ratingInput = document.getElementById("selectedRating");
+    
+            stars.forEach((star) => {
+                star.addEventListener("click", function () {
+                    const value = parseInt(this.getAttribute("data-value"), 10);
+                    ratingInput.value = value; // Set the hidden input value
+    
+                    // Update the star styles
+                    stars.forEach((s, index) => {
+                        if (index < value) {
+                            s.classList.add("fill");
+                        } else {
+                            s.classList.remove("fill");
+                        }
+                    });
+                });
+            });
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+    // Select all "Add to Cart" buttons
+    const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+    addToCartButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+            // Get product data from button attributes
+            const productId = this.getAttribute("data-product-id");
+            const productName = this.getAttribute("data-product-name");
+            const productPrice = this.getAttribute("data-product-price");
+            const productImage = this.getAttribute("data-product-image");
+
+            console.log('productId', productId);
+
+            // Create payload
+            const payload = {
+                product_id: productId,
+                product_name: productName,
+                product_price: productPrice,
+                product_image: productImage,
+            };
+
+            // Send data to server
+            fetch("/add-to-cart", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data);
+                    
+                    if (data.success) {
+                        // SweetAlert2 Toast for success
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Product added to cart!',
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+
+                        // Optionally update cart UI or cart count
+                        // document.querySelector(".cart-count-lable").textContent = data.cartCount;
+                    } else {
+                        // SweetAlert2 Toast for failure
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'Failed to add product to cart.',
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error adding product to cart:", error);
+
+                    // SweetAlert2 Toast for error
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Error adding product to cart.',
+                        showConfirmButton: false,
+                        timer: 1500,
+                    });
+                });
+        });
+    });
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form");
+    const starRating = document.querySelectorAll("#starRating i");
+    const selectedRating = document.getElementById("selectedRating");
+
+    // Add event listener to the stars for rating
+    starRating.forEach(star => {
+        star.addEventListener("click", function () {
+            const rating = this.getAttribute("data-value");
+            selectedRating.value = rating;
+            
+            // Highlight selected stars
+            starRating.forEach(star => star.classList.remove('selected'));
+            for (let i = 0; i < rating; i++) {
+                starRating[i].classList.add('selected');
+            }
+        });
+    });
+
+    form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            rating: formData.get("rating"),
+            comment: formData.get("comment"),
+            productName: formData.get("productName")
+        };
+
+        try {
+            // Make the POST request to the backend
+            const response = await fetch("/add-review", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                // Show SweetAlert success message
+                Swal.fire({
+                    title: 'Success!',
+                    text: result.message,
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                });
+
+                // Optionally, reset the form
+                form.reset();
+                selectedRating.value = '';
+                starRating.forEach(star => star.classList.remove('selected'));
+            } else {
+                // Show SweetAlert error message
+                Swal.fire({
+                    title: 'Error!',
+                    text: result.message || 'Something went wrong.',
+                    icon: 'error',
+                    confirmButtonText: 'Try Again'
+                });
+            }
+        } catch (error) {
+            console.error(error);
+            Swal.fire({
+                title: 'Error!',
+                text: 'An unexpected error occurred.',
+                icon: 'error',
+                confirmButtonText: 'Try Again'
+            });
+        }
+    });
+});
+
+
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</body>
+</html>

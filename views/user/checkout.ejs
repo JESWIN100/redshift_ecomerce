@@ -1,0 +1,636 @@
+
+<body class="checkout_page">
+   
+    <style>
+      .cod-container {
+      width: 80%;
+      max-width: 400px;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      padding: 16px;
+      text-align: center;
+  }
+  
+  .cod-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: bold;
+      color: #000000;
+  }
+  
+  .cod-icon {
+      font-size: 20px;
+  }
+  
+  
+  .cod-button {
+      background: #ffd600;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 16px;
+      font-size: 16px;
+      color: #000000;
+      cursor: pointer;
+      width: 100%;
+  }
+  
+  .cod-button:hover {
+      background: #ffcc00;
+  }
+  
+  @media (max-width: 768px) {
+      .cod-container {
+          padding: 12px;
+      }
+  
+      .cod-message {
+          font-size: 13px;
+      }
+  
+      .cod-button {
+          font-size: 15px;
+          padding: 10px;
+      }
+  }
+    </style>
+      <!-- Header start  -->
+      <%-include('../partials/userHeader' )%>
+      <!-- Header End  -->
+  
+      <!-- ekka Cart Start -->
+      <div class="ec-side-cart-overlay"></div>
+    
+      <!-- ekka Cart End -->
+  
+      <!-- Ec breadcrumb start -->
+      <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12">
+                      <div class="row ec_breadcrumb_inner">
+                          <div class="col-md-6 col-sm-12">
+                              <h2 class="ec-breadcrumb-title">Checkout</h2>
+                          </div>
+                          <div class="col-md-6 col-sm-12">
+                              <!-- ec-breadcrumb-list start -->
+                              <ul class="ec-breadcrumb-list">
+                                  <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+                                  <li class="ec-breadcrumb-item active">Checkout</li>
+                              </ul>
+                              <!-- ec-breadcrumb-list end -->
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!-- Ec breadcrumb end -->
+  
+      <!-- Ec checkout page -->
+      <section class="ec-page-content section-space-p">
+          <div class="container">
+              <div class="row">
+                  <div class="ec-checkout-leftside col-lg-8 col-md-12 ">
+                      <!-- checkout content Start -->
+                      <div class="ec-checkout-content">
+                          <div class="ec-checkout-inner">
+                             
+                              <div class="ec-checkout-wrap margin-bottom-30 padding-bottom-3">
+                                  <div class="ec-checkout-block ec-check-bill">
+                                      <h3 class="ec-checkout-title">Billing Details</h3>
+                                      <div class="ec-bl-block-content">
+                                          <div class="ec-check-subtitle">Checkout Options</div>
+                                         
+                                          <div class="ec-check-bill-form">
+                                              <form  id="checkout-form">
+                                                  <span class="ec-bill-wrap ec-bill-half">
+                                                      <label>First Name*</label>
+                                                      <input type="text" name="firstname"
+                                                          placeholder="Enter your first name" required />
+                                                  </span>
+                                                  <span class="ec-bill-wrap ec-bill-half">
+                                                      <label>Last Name*</label>
+                                                      <input type="text" name="lastname"
+                                                          placeholder="Enter your last name" required />
+                                                  </span>
+                                                  <span class="ec-bill-wrap">
+                                                      <label>Address</label>
+                                                      <input type="text" name="address" placeholder="Address Line 1" />
+                                                  </span>
+                                                  <span class="ec-bill-wrap ec-bill-half">
+                                                    <label>City *</label>
+                                                    <!-- <span class="ec-bl-select-inner"> -->
+                                                        <input type="text" name="ec_select_city" id="ec-select-city">
+                                                    <!-- </span> -->
+                                                </span>
+                                                
+                                                  <span class="ec-bill-wrap ec-bill-half">
+                                                      <label>Post Code</label>
+                                                      <input type="text" name="postalcode" placeholder="Post Code" />
+                                                  </span>
+                                                  <span class="ec-bill-wrap ec-bill-half">
+                                                      <label>Country *</label>
+                                                      <span class="ec-bl-select-inner">
+                                                          <select name="ec_select_country" id="ec-select-country" class="ec-bill-select">
+                                                              <option selected disabled>Country</option>
+                                                              <option value="India">India</option>
+                                                              <option value="UAE">UAE</option>
+                                                              <option value="United">United States</option>
+                                                              <option value="Canada">Canada</option>
+                                                              <option value="Australia">Australia</option>
+                                                              <option value="United Kingdom">United Kingdom</option>
+                                                              <option value="Germany">Germany</option>
+                                                              <option value="France">France</option>
+                                                              <option value="Japan">Japan</option>
+                                                              <option value="South Korea">South Korea</option>
+                                                              <option value="Brazil">Brazil</option>
+                                                              <option value="South Africa">South Africa</option>
+                                                              <option value="Italy">Italy</option>
+                                                              <option value="Spain">Spain</option>
+                                                              <option value="Singapore">Singapore</option>
+                                                          </select>
+                                                          
+                                                      </span>
+                                                  </span>
+                                                  <span class="ec-bill-wrap ec-bill-half">
+                                                      <label>Region State</label>
+                                                    
+                                                          <input name="ec_select_state" id="ec-select-state"
+                                                          class="ec-bill-select" type="text">
+                                                         
+                                                  </span>
+                                                  <input type="hidden" name="total_amount" id="hidden_total_amount" value="<%= total + 80 %>" />
+                                                  <input type="hidden" name="payment_method" id="hidden_payment_method" value="Cash On Delivery" />
+                                          </div>
+  
+                                      </div>
+                                  </div>
+                                 
+                                  
+                              </div>
+                              <span class="ec-check-order-btn">
+                                  <button class="btn btn-primary" type="submit" id='rzp-button1' >Place Order</button>
+                              </span>
+                          </form>
+                          </div>
+                      </div>
+                      <!--cart content End -->
+                  </div>
+                  <!-- Sidebar Area Start -->
+                  <div class="ec-checkout-rightside col-lg-4 col-md-12">
+                      <div class="ec-sidebar-wrap">
+                          <!-- Sidebar Summary Block -->
+                          <div class="ec-sidebar-block">
+                              <div class="ec-sb-title">
+                                  <h3 class="ec-sidebar-title">Summary</h3>
+                              </div>
+                              <div class="ec-sb-block-content">
+                                  <div class="ec-checkout-summary">
+                                      <div>
+                                          <span class="text-left">Sub-Total</span>
+                                          <span class="text-right">AED <%= total %></span>
+                                      </div>
+                                      <div>
+                                          <span class="text-left">Delivery Charges</span>
+                                          <span class="text-right">AED 80.00</span>
+                                      </div>
+                                      <div>
+                                          <span class="text-left">Coupon Discount</span>
+                                          <span class="text-right"><a class="ec-checkout-coupan">Apply Coupon</a></span>
+                                      </div>
+                                      <div class="ec-checkout-coupan-content">
+                                          <form class="ec-checkout-coupan-form" method="post">
+                                              <input class="ec-coupan" type="text" required placeholder="Enter Your Coupon Code">
+                                              <button class="ec-coupan-btn button btn-primary" type="submit">Apply</button>
+                                          </form>
+                                      </div>
+                                      <div class="ec-checkout-summary-total">
+                                          <span class="text-left">Total Amount</span>
+                                          
+                                          <span class="text-right" id="price"> </span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          
+                          <!-- Sidebar Summary Block -->
+                      </div>
+                      <div class="ec-sidebar-wrap ec-checkout-del-wrap">
+                          <!-- Sidebar Summary Block -->
+                         
+                          <!-- Sidebar Summary Block -->
+                      </div>
+                      <div class="ec-sidebar-wrap ec-checkout-pay-wrap">
+                          <!-- Sidebar Payment Block -->
+                          <div class="ec-sidebar-block">
+                              <div class="ec-sb-title">
+                                  <h3 class="ec-sidebar-title">Payment Method</h3>
+                              </div>
+                              <div class="ec-sb-block-content">
+                                  <div class="ec-checkout-pay">
+                                      <span class="ec-pay-option">
+                                          <input type="radio" id="pay_cod" name="payment_method_radio" value="Cash On Delivery"   />
+                                          <label for="pay_cod">Cash On Delivery</label>
+                                          <input type="radio" id="pay_razorpay" name="payment_method_radio" value="Razorpay" checked  />
+                                          <label for="pay_razorpay">Razorpay</label>
+                                      </span>
+                                  </div>
+                                  <div class="cod-container" style="display: none;   overflow: hidden; transition: all 0.9s ease;">
+                                      <div class="cod-header">
+                                          <span class="cod-icon">💵</span>
+                                          <span>Cash on Delivery</span>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- Sidebar Payment Block -->
+                      </div>
+                      <div class="ec-sidebar-wrap ec-check-pay-img-wrap">
+                          <!-- Sidebar Payment Block -->
+                          <div class="ec-sidebar-block">
+                              <div class="ec-sb-title">
+                                  <h3 class="ec-sidebar-title">Payment Method</h3>
+                              </div>
+              
+                              <div class="ec-sb-block-content">
+                                  <div class="ec-check-pay-img-inner">
+                                      <div class="ec-check-pay-img">
+                                          <img src="https://www.ecommerce-nation.com/wp-content/uploads/2019/02/razorpay.webp" alt="">
+                                      </div>
+                                      
+                                      <!-- <div class="ec-check-pay-img">
+                                          <img src="assets/images/icons/payment3.png" alt="">
+                                      </div> -->
+                                      <!-- <div class="ec-check-pay-img">
+                                          <img src="assets/images/icons/payment4.png" alt="">
+                                      </div> -->
+                                      <!-- <div class="ec-check-pay-img">
+                                          <img src="assets/images/icons/payment5.png" alt="">
+                                      </div>
+                                      <div class="ec-check-pay-img">
+                                          <img src="assets/images/icons/payment6.png" alt="">
+                                      </div>
+                                      <div class="ec-check-pay-img">
+                                          <img src="assets/images/icons/payment7.png" alt="">
+                                      </div> -->
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- Sidebar Payment Block -->
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+  
+    
+      <!-- New Product end -->
+  
+      <!-- Footer Start -->
+      <%-include('../partials/userFooter' )%>
+      <!-- Footer Area End -->
+  
+      <!-- Modal -->
+     
+      <!-- Modal end -->
+  
+    
+    
+  
+      <!-- Whatsapp -->
+      <div class="ec-style ec-right-bottom">
+         
+          <!--/ End Floating Panel Container -->
+          <!-- Start Right Floating Button-->
+          <div class="ec-right-bottom">
+              <div class="ec-box">
+                  
+              </div>
+          </div>
+          <!--/ End Right Floating Button-->
+      </div>
+      <!-- Whatsapp end -->
+  
+      <!-- Feature tools -->
+   
+      <!-- Feature tools end -->
+  
+      <script>
+          document.getElementById("pay_cod").addEventListener("click", function () {
+              document.querySelector(".cod-container").style.display = "block";
+          });
+      
+          document.getElementById("pay_razorpay").addEventListener("click", function () {
+              document.querySelector(".cod-container").style.display = "none";
+          });
+      </script>
+  
+  
+  
+      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      <script>
+  
+  
+  
+  
+  
+  
+  document.addEventListener('DOMContentLoaded', () => {
+          initializeTotal();
+      });
+  
+      // Initialize total on page load
+      function initializeTotal() {
+          const baseTotal = parseFloat("<%= total %>"); // Server-rendered total
+          const deliveryCharges = 80; // Fixed delivery charges
+          const finalTotal = baseTotal + deliveryCharges;
+  
+          // Update UI and hidden input
+          document.getElementById("price").innerText = `AED ${finalTotal.toFixed(2)}`;
+          document.getElementById("hidden_total_amount").value = finalTotal.toFixed(2);
+          console.log('Initialized Total:', finalTotal);
+      }
+  
+      // Apply coupon and update total
+      document.querySelector('.ec-coupan-btn').addEventListener('click', async (e) => {
+          e.preventDefault();
+  
+          const couponCode = document.querySelector('.ec-coupan').value;
+          const summaryTotalElement = document.querySelector('.ec-checkout-summary-total .text-right');
+          const basePriceElement = document.getElementById('price');
+  
+          let totalAmount = parseFloat(basePriceElement.textContent.replace('AED ', ''));
+  
+          if (!couponCode) {
+              alert('Please enter a coupon code.');
+              return;
+          }
+  
+          try {
+              const response = await fetch('/apply-coupon', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ couponcode: couponCode })
+              });
+  
+              const result = await response.json();
+  
+              if (response.ok) {
+                  const discount = parseFloat(result.discount);
+                  const discountedAmount = totalAmount - discount;
+  
+                  // Update total in UI and hidden input
+                  summaryTotalElement.textContent = `AED ${discountedAmount.toFixed(2)}`;
+                  document.getElementById("hidden_total_amount").value = discountedAmount.toFixed(2);
+  
+                  alert(`Coupon applied successfully! You saved AED ${discount.toFixed(2)}.`);
+              } else {
+                  alert(result.message);
+              }
+          } catch (error) {
+              console.error('Error applying coupon:', error);
+              alert('Something went wrong while applying the coupon.');
+          }
+      });
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+          document.getElementById('rzp-button1').onclick =async function (e) {
+      e.preventDefault();
+      const totalAmountElement = document.getElementById('hidden_total_amount');
+      const totalAmount = parseFloat(totalAmountElement.value);
+      console.log(totalAmount);
+  
+      const firstname = document.querySelector('input[name="firstname"]').value.trim();
+      const lastname = document.querySelector('input[name="lastname"]').value.trim();
+      const address = document.querySelector('input[name="address"]').value.trim();
+      const city = document.querySelector('input[name="ec_select_city"]').value.trim();
+      const postalcode = document.querySelector('input[name="postalcode"]').value.trim();
+      const country = document.querySelector('select[name="ec_select_country"]').value.trim();
+      const state = document.querySelector('input[name="ec_select_state"]').value.trim();
+      const payment_method = document.querySelector('input[name="payment_method_radio"]:checked')?.value;
+  
+      // Validate the form fields
+      if (!firstname || !lastname || !address || !city || !postalcode || !country || !state || !payment_method) {
+          Swal.fire('Validation Error', 'Please fill in all the required fields.', 'error');
+          return;
+      }
+  
+      if (isNaN(totalAmount)) {
+          Swal.fire('Error', 'Invalid amount detected.', 'error');
+          return;
+      }
+      if (payment_method === "Cash On Delivery") {
+          const confirmCOD = await Swal.fire({
+              title: 'Confirm Cash On Delivery',
+              text: "You have selected Cash On Delivery. Do you want to proceed?",
+              icon: 'question',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, place order!',
+          });
+  
+          if (!confirmCOD.isConfirmed) {
+              return;
+          }
+          // Save order details for Cash on Delivery directly
+          fetch('http://localhost:5000/create-order', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  amount: totalAmount,  // Amount in INR
+                  currency: 'AED',
+                  firstname: firstname,
+                  lastname: lastname,
+                  address: address,
+                  city: city,
+                  postalcode: postalcode,
+                  country: country,
+                  state: state,
+                  payment_method: payment_method,
+              }),
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                      Swal.fire('Order Successful!', 'Your order has been placed successfully with Cash On Delivery.', 'success');
+                  } else {
+                      Swal.fire('Error', `Error placing order: ${data.error}`, 'error');
+                  }
+          
+          })
+          .catch(error => {
+              console.error('Error saving order:', error);
+              Swal.fire('Error', 'Something went wrong while saving the order.', 'error');
+          });
+      } else {
+          // Online payment flow for Razorpay
+          fetch('http://localhost:5000/create-order', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  amount: totalAmount,  // Amount in INR
+                  currency: 'AED',
+                  firstname: firstname,
+                  lastname: lastname,
+                  address: address,
+                  city: city,
+                  postalcode: postalcode,
+                  country: country,
+                  state: state,
+                  payment_method: payment_method,
+              }),
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success && data.orderId) {
+                  const options = {
+                      key: "rzp_test_pEZkADDtQIAgoQ", // Your Razorpay key ID
+                      amount: totalAmount, // Amount in paise
+                      currency: "AED",
+                      name: "Acme Corp",
+                      description: "Test Transaction",
+                      image: "https://media.drive.com.au/obj/tx_q:50,rs:auto:1920:1080:1/driveau/private/ca-s3/2013/08/toyota-supra--e1375969681104-625x322",
+                      order_id: data.orderId, // Razorpay order ID
+                      handler: function (response) {
+                          fetch('http://localhost:5000/payment-success', {
+                              method: 'POST',
+                              headers: {
+                                  'Content-Type': 'application/json',
+                              },
+                              body: JSON.stringify({
+                                  paymentId: response.razorpay_payment_id,
+                                  orderId: response.razorpay_order_id,
+                                  signature: response.razorpay_signature,
+                                  
+                              }),
+                          })
+                          .then(res => res.json())
+                          .then(result => {
+                            if (result.success) {
+                                Swal.fire({
+            icon: 'success',
+            title: 'Payment Successful',
+            text: 'Your payment was processed successfully.',
+            confirmButtonText: 'OK'
+        }).then(() => {
+            window.location.href = '/';
+        });
+                            } else {
+                                Swal.fire({
+            icon: 'error',
+            title: 'Payment Failed',
+            text: 'Error: ' + result.error,
+            confirmButtonText: 'Try Again'
+        });
+                            }
+                        });
+                    },
+                      prefill: {
+                          name:  `${firstname} ${lastname}`,
+                          email: "<%= adress.email %>",
+                          contact: "<%= adress.phone %>",
+                      },
+                      theme: {
+                          color: "#3399cc",
+                      },
+                  };
+                  var rzp1 = new Razorpay(options);
+                  rzp1.open();
+              } else {
+                  alert('Error creating order');
+              }
+          })
+          .catch(error => {
+              console.error('Error creating order:', error);
+              alert('Something went wrong while creating the order.');
+          });
+      }
+  };
+  
+          </script>
+  
+  
+          <!-- document.querySelector('.ec-coupan-btn').addEventListener('click', async (e) => {
+              e.preventDefault();
+      
+              const couponCode = document.querySelector('.ec-coupan').value;
+              const summaryTotalElement = document.querySelector('.ec-checkout-summary-total .text-right');
+              const basePriceElement = document.getElementById('price');
+      
+            
+              let totalAmount = parseFloat(basePriceElement.textContent.replace('AED ', ''));
+     
+      
+              if (!couponCode) {
+                  alert('Please enter a coupon code.');
+                  return;
+              }
+      
+              try {
+                  const response = await fetch('/apply-coupon', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ couponcode: couponCode })
+                  });
+      
+                  const result = await response.json();
+      
+                  if (response.ok) {
+                      const discount = parseFloat(result.discount);
+                      const discountedAmount = totalAmount - discount;
+      
+                   
+                      summaryTotalElement.textContent = `AED ${discountedAmount.toFixed(2)}`;
+    
+      
+                     
+                      alert(`Coupon applied successfully! You saved AED ${discount.toFixed(2)}.`);
+                  } else {
+                      alert(result.message);
+                  }
+              } catch (error) {
+                  console.error('Error applying coupon:', error);
+                  alert('Something went wrong while applying the coupon.');
+              }
+          });
+      
+          function initializeTotal() {
+              const baseTotal = parseFloat("<%= total %>"); 
+              const finalTotal = baseTotal + 80; 
+              document.getElementById("price").innerText = `AED ${finalTotal.toFixed(2)}`;
+              document.getElementById("hidden_total_amount").value = finalTotal.toFixed(2); 
+              console.log(finalTotal);
+              
+          }
+  
+          
+          function updatePaymentMethod(method) {
+              document.getElementById('hidden_payment_method').value = method;
+          }
+  
+          initializeTotal(); -->
+      </script> 
+      
+  
+  </body>
+  </html>

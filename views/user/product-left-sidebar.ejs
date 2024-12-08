@@ -1,0 +1,175 @@
+<style>
+  
+
+.img-fluid {
+    width: 100%;
+        height: auto;
+        object-fit: cover;
+        border-radius: 8px;
+}
+
+.pagination .active {
+    background-color: #007bff;
+    color: #fff;
+    pointer-events: none;
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+
+    
+</style>
+<!-- Bootstrap CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+<body class="product_page">
+   <div id="ec-overlay">
+       <div class="ec-ellipsis">
+           <div></div>
+           <div></div>
+           <div></div>
+           <div></div>
+       </div>
+   </div>
+
+   <!-- Header start  -->
+   <%-include('../partials/userHeader' )%>
+   <!-- Header End  -->
+
+   <!-- ekka Cart Start -->
+   <div class="ec-side-cart-overlay"></div>
+  
+   <!-- ekka Cart End -->
+
+   <!-- Ec breadcrumb start -->
+   <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+       <div class="container">
+           <div class="row">
+               <div class="col-12">
+                   <div class="row ec_breadcrumb_inner">
+                       <div class="col-md-6 col-sm-12">
+                           <h2 class="ec-breadcrumb-title"> Products</h2>
+                       </div>
+                       <div class="col-md-6 col-sm-12">
+                           <!-- ec-breadcrumb-list start -->
+                           <ul class="ec-breadcrumb-list">
+                               <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+                               <li class="ec-breadcrumb-item active">Products</li>
+                           </ul>
+                           <!-- ec-breadcrumb-list end -->
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+   <!-- Ec breadcrumb end -->
+
+   <div class="dropdown mt-4 ml-4">
+    <a class="btn  dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Select Category
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item filter" href="#" data-filter="all">All</a></li>
+        <% categories.forEach(category => { %>
+            <li><a class="dropdown-item filter" href="#" data-filter="<%= category.categoryName.toLowerCase() %>">
+                <%= category.categoryName %>
+            </a></li>
+        <% }); %>
+    </ul>
+</div>
+  
+  
+
+
+
+   <!-- End Single product -->
+   <div class="container my-4">
+    <div class="row">
+        <% products.forEach(product => { %>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4 product-item <%= product.category_name.toLowerCase() %>">
+                <div class="product shadow-sm p-3 bg-white rounded text-center">
+                    <a href="/product-single/<%= product.product_id %>">
+                    <img alt="<%= product.product_name %>" class="img-fluid mb-3" src="<%= product.image_url %>" />
+                </a>
+                    <h3 class="h6">
+                        <a href="/product-single/<%= product.product_id %>" class="text-decoration-none text-dark"><%= product.product_name %></a>
+                    </h3>
+                    
+                    <div class="price text-secondary">
+                        AED <%= product.price %>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+   
+</div>
+
+    
+   <!-- Related Product Start -->
+  
+   <!-- Related Product end -->
+
+   <!-- Footer Start -->
+   <%-include('../partials/userFooter' )%>
+   <!-- Footer Area End -->
+
+
+   <!-- Whatsapp -->
+   <div class="ec-style ec-right-bottom">
+       
+
+       <div class="ec-right-bottom">
+           <div class="ec-box">
+               
+           </div>
+       </div>
+       <!--/ End Right Floating Button-->
+   </div>
+   <!-- Whatsapp end -->
+
+   <!-- Feature tools -->
+   <div class="ec-tools-sidebar-overlay"></div>
+  
+   <!-- Feature tools end -->
+
+</body>
+
+</body>
+
+<script>
+    // Category Filtering
+    document.addEventListener("DOMContentLoaded", () => {
+    const filterButtons = document.querySelectorAll(".filter");
+    const productItems = document.querySelectorAll(".product-item");
+
+    filterButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            e.preventDefault();
+            const category = button.dataset.filter;
+
+            // Highlight active filter button
+            filterButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            // Filter products
+            productItems.forEach(item => {
+                if (category === "all" || item.classList.contains(category)) {
+                    item.style.display = "block";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+    });
+});
+
+</script>
+</html>

@@ -1,0 +1,268 @@
+
+<body>
+    <!-- Include SweetAlert2 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css">
+
+<!-- Include SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js"></script>
+
+    <style>
+        /* Modal Style */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Animation for modal fade-in */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+
+    <!-- Header start  -->
+ 
+    <!-- Header End  -->
+
+    <!-- ekka Cart Start -->
+    <div class="ec-side-cart-overlay"></div>
+   
+    <!-- ekka Cart End -->
+
+    <!-- Ec breadcrumb start -->
+    <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row ec_breadcrumb_inner">
+                        <div class="col-md-6 col-sm-12">
+                            <h2 class="ec-breadcrumb-title">Login</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <!-- ec-breadcrumb-list start -->
+                            <ul class="ec-breadcrumb-list">
+                                <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="ec-breadcrumb-item active">Login</li>
+                            </ul>
+                            <!-- ec-breadcrumb-list end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ec breadcrumb end -->
+
+    <!-- Ec login page -->
+    <section class="ec-page-content section-space-p">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="section-title">
+                        <h2 class="ec-bg-title">Log In</h2>
+                        <h2 class="ec-title">Log In</h2>
+                        <p class="sub-title mb-3">Best place to buy and sell digital products</p>
+                    </div>
+                </div>
+                <div class="ec-login-wrapper">
+                    <div class="ec-login-container">
+                        <div class="ec-login-form">
+                            <% if (messages.success) { %>
+                                <div class="alert alert-success" role="alert">
+                                    <%= messages.success %>
+                                </div>
+                            <% } %>
+    
+                            <% if (messages.error) { %>
+                                <div class="alert alert-danger" role="alert">
+                                    <%= messages.error %>
+                                </div>
+                            <% } %>
+                            <!-- Form submits to /login route -->
+                            <form action="/userlogin" method="post">
+                              
+                                <span class="ec-login-wrap">
+                                    <label>Email Address*</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        placeholder="Enter your email address..."
+                                        required
+                                    />
+                                </span>
+                                <span class="ec-login-wrap">
+                                    <label>Password*</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        placeholder="Enter your password"
+                                        required
+                                    />
+                                </span>
+                                
+                                <p><a class="text-blue" href="#" onclick="openForgotPasswordModal()">Forgot Password?</a></p>
+
+                                
+                                <span class="ec-login-wrap ec-login-btn">
+                                    <button class="btn btn-primary" type="submit">Login</button>
+                                    
+                                </span>
+                                	
+									<div style="margin-top: 15px;">
+                                        <p class="sign-upp">Don't have an account yet ?
+											<a class="text-blue" href="/sign-up">Sign Up</a>
+										</p>
+                                    </div>	
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeForgotPasswordModal()">&times;</span>
+            <h3>Forgot Your Password?</h3>
+            <p>Please enter your email address below, and we will send you a link to reset your password.</p>
+            <form id="resetPasswordForm" action="/requestPasswordReset" method="post">
+                <label>Email Address*</label>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required
+                />
+                <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Reset Password</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+     document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+    
+            // Show success toast for removed item
+            if (urlParams.get('success') === 'true') {
+                if (typeof Swal !== "undefined") { // Ensure Swal is loaded
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Sign-in Sucessfully!',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+    
+                    // Optionally remove the query parameter from the URL
+                    const newUrl = window.location.origin + window.location.pathname;
+                    window.history.replaceState({}, document.title, newUrl);
+                } else {
+                    console.error("SweetAlert is not loaded on this page.");
+                }
+            }
+        });
+
+</script>
+
+    <script>
+        // Function to open the forgot password modal
+        function openForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').style.display = 'block';
+        }
+    
+        // Function to close the forgot password modal
+        function closeForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+        }
+    
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('forgotPasswordModal')) {
+                closeForgotPasswordModal();
+            }
+        }
+    
+      // Handle form submission
+document.querySelector('#forgotPasswordModal form').onsubmit = async function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get email value from the correct input field
+    const email = document.querySelector('#forgotPasswordModal input[name="email"]').value;
+
+    try {
+        const response = await fetch('/requestPasswordReset', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Show success SweetAlert
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: data.message || 'A password reset link has been sent to your email.',
+            });
+            closeForgotPasswordModal(); // Close modal after success
+        } else {
+            // Show error SweetAlert
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.message || 'There was an issue sending the reset email.',
+            });
+        }
+    } catch (error) {
+        console.error(error);
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Something went wrong. Please try again later.',
+        });
+    }
+};
+
+    </script>
+    
+</body>
+</html>

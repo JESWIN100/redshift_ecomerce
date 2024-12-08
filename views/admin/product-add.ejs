@@ -1,0 +1,243 @@
+<script>
+	
+</script>
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+	<!-- WRAPPER -->
+	<div class="wrapper">
+
+		<!-- LEFT MAIN SIDEBAR -->
+		<%-include('../partials/adminsidenav' )%>
+		<!-- PAGE WRAPPER -->
+		<div class="ec-page-wrapper">
+
+			<!-- Header -->
+			<%-include('../partials/adminHeader' )%>
+
+			<!-- CONTENT WRAPPER -->
+			<div class="ec-content-wrapper">
+				<div class="content">
+					<div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+						<div>
+							<h1>Add Product</h1>
+							<p class="breadcrumbs"><span><a href="/admin/home">Home</a></span>
+								<span><i class="mdi mdi-chevron-right"></i></span>Product</p>
+						</div>
+						<div>
+							<a href="/admin/product-list" class="btn btn-primary"> View All
+							</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="card card-default">
+								<div class="card-header card-header-border-bottom">
+									<h2>Add Product</h2>
+								</div>
+					
+								<div class="card-body">
+									<div class="row ec-vendor-uploads">
+										<div class="col-lg-4">
+											<div class="ec-vendor-img-upload">
+												<div class="ec-vendor-main-img">
+													<div class="avatar-upload">
+														<form class="row g-3" action="/admin/add-product" method="POST" enctype="multipart/form-data">
+															<!-- Main Image -->
+															<div class="avatar-edit">
+																<input type="file" id="image_url" name="image_url" class="ec-image-upload" accept=".png, .jpg, .jpeg" />
+																<label for="image_url">
+																	<img src="/asset/img/icons/edit.svg" class="svg_img header_svg" alt="edit" />
+																</label>
+															</div>
+															<div class="avatar-preview ec-preview">
+																<div class="imagePreview ec-div-preview">
+																	<img class="ec-image-preview" src="/asset/img/products/vender-upload-preview.jpg" alt="edit" />
+																</div>
+															</div>
+										
+															
+															<div class="thumb-upload-set colo-md-12">
+																<div class="thumb-upload">
+																	<div class="thumb-edit">
+																		<input type='file' id="additional_images_1" name="additional_images"
+																			class="ec-image-upload"
+																			accept=".png, .jpg, .jpeg" />
+																		<label for="imageUpload"><img
+																				src="/asset/img/icons/edit.svg"
+																				class="svg_img header_svg" alt="edit" /></label>
+																	</div>
+																	<div class="thumb-preview ec-preview">
+																		<div class="image-thumb-preview">
+																			<img class="image-thumb-preview ec-image-preview"
+																				src="/asset/img/products/vender-upload-thumb-preview.jpg"
+																				alt="edit" />
+																		</div>
+																	</div>
+																</div>
+																<div class="thumb-upload">
+																	<div class="thumb-edit">
+																		<input type='file' id="additional_images_2" name="additional_images"
+																			class="ec-image-upload"
+																			accept=".png, .jpg, .jpeg" />
+																		<label for="imageUpload"><img
+																				src="/asset/img/icons/edit.svg"
+																				class="svg_img header_svg" alt="edit" /></label>
+																	</div>
+																	<div class="thumb-preview ec-preview">
+																		<div class="image-thumb-preview">
+																			<img class="image-thumb-preview ec-image-preview"
+																				src="/asset/img/products/vender-upload-thumb-preview.jpg"
+																				alt="edit" />
+																		</div>
+																	</div>
+																</div>
+																<div class="thumb-upload">
+																	<div class="thumb-edit">
+																		<input type='file' id="additional_images_3" name="additional_images"
+																			class="ec-image-upload"
+																			accept=".png, .jpg, .jpeg" />
+																		<label for="imageUpload"><img
+																				src="/asset/img/icons/edit.svg"
+																				class="svg_img header_svg" alt="edit" /></label>
+																	</div>
+																	<div class="thumb-preview ec-preview">
+																		<div class="image-thumb-preview">
+																			<img class="image-thumb-preview ec-image-preview"
+																				src="/asset/img/products/vender-upload-thumb-preview.jpg"
+																				alt="edit" />
+																		</div>
+																	</div>
+																</div>
+																<div class="thumb-upload">
+																	<div class="thumb-edit">
+																		<input type='file' id="additional_images_4" name="additional_images"
+																			class="ec-image-upload"
+																			accept=".png, .jpg, .jpeg" />
+																		<label for="imageUpload"><img
+																				src="/asset/img/icons/edit.svg"
+																				class="svg_img header_svg" alt="edit" /></label>
+																	</div>
+																	<div class="thumb-preview ec-preview">
+																		<div class="image-thumb-preview">
+																			<img class="image-thumb-preview ec-image-preview"
+																				src="/asset/img/products/vender-upload-thumb-preview.jpg"
+																				alt="edit" />
+																		</div>
+																	</div>
+																</div>
+																<div class="thumb-upload">
+																	<div class="thumb-edit">
+																		<input type='file' id="additional_images_5" name="additional_images"
+																			class="ec-image-upload"
+																			accept=".png, .jpg, .jpeg" />
+																		<label for="imageUpload"><img
+																				src="/asset/img/icons/edit.svg"
+																				class="svg_img header_svg" alt="edit" /></label>
+																	</div>
+																	<div class="thumb-preview ec-preview">
+																		<div class="image-thumb-preview">
+																			<img class="image-thumb-preview ec-image-preview"
+																				src="/asset/img/products/vender-upload-thumb-preview.jpg"
+																				alt="edit" />
+																		</div>
+																	</div>
+																</div>
+																
+															</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										<div class="col-lg-8">
+											<div class="ec-vendor-upload-detail">
+												<% if (messages.error) { %>
+													<div class="alert alert-danger" role="alert">
+														<%= messages.error %>
+													</div>
+												<% } %>
+												<form>
+													<div class="row">
+														<div class="col-md-6">
+															<label for="productName" class="form-label">Product name</label>
+															<input type="text" class="form-control" id="productName" name="product_name">
+														</div>
+										
+														<div class="col-md-12">
+															<label class="form-label">Sort Description</label>
+															<textarea class="form-control" name="description" rows="2"></textarea>
+														</div>
+										
+														<div class="col-md-6">
+															<label class="form-label">Price <span>(In AED)</span></label>
+															<input type="number" class="form-control" id="price1" name="price">
+														</div>
+										
+														<div class="col-md-6">
+															<label for="category" class="form-label">Category</label>
+															<select class="form-control" id="category" name="category" required>
+																<optgroup label="Select Category">
+																	<% categories.forEach(category => { %>
+																		<option value="<%= category.id %>:<%= category.categoryName %>"><%= category.categoryName %></option>
+																	<% }); %>
+																</optgroup>
+															</select>
+														</div>
+										
+														<div class="col-md-12 mt-3">
+															<button type="submit" class="btn btn-primary w-100">Submit</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div> <!-- End Content -->
+			</div> <!-- End Content Wrapper -->
+
+			<!-- Footer -->
+			<%-include('../partials/adminFooter' )%>
+
+		</div> <!-- End Page Wrapper -->
+	</div> <!-- End Wrapper -->
+
+
+</body>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const urlParams = new URLSearchParams(window.location.search);
+		
+		// Show success toast for added coupon
+		if (urlParams.get('success') === 'true') {
+			Swal.fire({
+				toast: true,
+				position: 'top-end',
+				icon: 'success',
+				title: 'Product added successfully!',
+				showConfirmButton: false,
+				timer: 3000
+			});
+		}
+		
+		// Show success toast for deleted coupon
+	   
+if (urlParams.get('deleted') === 'true') {
+Swal.fire({
+	toast: true,
+	position: 'top-end',
+	icon: 'success',
+	title: 'Coupon deleted successfully!',
+	showConfirmButton: false,
+	timer: 3000
+});
+}
+	});
+</script>
+</html>

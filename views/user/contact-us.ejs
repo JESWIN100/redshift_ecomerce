@@ -1,0 +1,162 @@
+
+<body class="contact_us_page">
+    
+
+    <!-- Header start  -->
+    <%-include('../partials/userHeader' )%>
+    <!-- Header End  -->
+
+    <!-- ekka Cart Start -->
+    
+    <!-- ekka Cart End -->
+
+    <!-- Ec breadcrumb start -->
+    <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row ec_breadcrumb_inner">
+                        <div class="col-md-6 col-sm-12">
+                            <h2 class="ec-breadcrumb-title">Contact Us</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <!-- ec-breadcrumb-list start -->
+                            <ul class="ec-breadcrumb-list">
+                                <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="ec-breadcrumb-item active">Contact Us</li>
+                            </ul>
+                            <!-- ec-breadcrumb-list end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ec breadcrumb end -->
+
+    <!-- Ec Contact Us page -->
+    <section class="ec-page-content section-space-p">
+        <div class="container">
+            <div class="row">
+                <div class="ec-common-wrapper">
+                    <div class="ec-contact-leftside">
+                        <div class="ec-contact-container">
+                            <div class="ec-contact-form">
+                                <form action="/contactus" method="post">
+                                    <% if (messages.success) { %>
+                                        <div class="alert alert-success" role="alert">
+                                            <%= messages.success %>
+                                        </div>
+                                    <% } %>
+            
+                                    <% if (messages.error) { %>
+                                        <div class="alert alert-danger" role="alert">
+                                            <%= messages.error %>
+                                        </div>
+                                    <% } %>
+                                    <span class="ec-contact-wrap">
+                                        <label>First Name*</label>
+                                        <input type="text" name="firstname" placeholder="Enter your first name" required />
+                                    </span>
+                                    <span class="ec-contact-wrap">
+                                        <label>Last Name*</label>
+                                        <input type="text" name="lastname" placeholder="Enter your last name" required />
+                                    </span>
+                                    <span class="ec-contact-wrap">
+                                        <label>Email*</label>
+                                        <input type="email" name="email" placeholder="Enter your email address" required />
+                                    </span>
+                                    <span class="ec-contact-wrap">
+                                        <label>Phone Number*</label>
+                                        <input type="text" name="phonenumber" placeholder="Enter your phone number" />
+                                    </span>
+                                    <span class="ec-contact-wrap">
+                                        <label>Comments/Questions*</label>
+                                        <textarea name="address" placeholder="Please leave your comments here.."></textarea>
+                                    </span>
+                                    <span class="ec-contact-wrap ec-contact-btn">
+                                        <button class="btn btn-primary" type="submit">Submit</button>
+                                    </span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ec-contact-rightside">
+                        <div class="ec_contact_map">
+                            <div class="ec_map_canvas">
+                                <iframe id="ec_map_canvas" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d83690.63324932074!2d55.28554819491368!3d25.187422213753422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f5db6b426b771%3A0x5e24b8f5d2b3d597!2sInternational%20General%20Trading%20LLC!5e0!3m2!1sen!2sin!4v1732856512042!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <!-- <iframe id="ec_map_canvas"
+                                    src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d71263.65594328841!2d144.93151478652146!3d-37.8734290780509!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1615963387757!5m2!1sen!2sus"></iframe> -->
+                                <a href="https://sites.google.com/view/maps-api-v2/mapv2"></a>
+                            </div>
+                        </div>
+                        <div class="ec_contact_info">
+                            <h1 class="ec_contact_info_head">Contact us</h1>
+                            <ul class="align-items-center">
+                                <li class="ec-contact-item"><i class="ecicon eci-map-marker"
+                                        aria-hidden="true"></i><span>Address :</span> Mr. RED SHIFT INTERNATIONAL GENERAL TRADING LLC
+                                        MUFATEEH AL MAKHAZAN STORES MANAGEMENT
+                                        BUILDING NO. 2 DUBAI INVESTMENT PARK 2</li>
+                                <li class="ec-contact-item align-items-center"><i class="ecicon eci-phone"
+                                        aria-hidden="true"></i><span>Call Us :</span><a href="tel:+971- 43423441">+971- 43423441 MOB. +971- 561139444</a></li>
+                                <li class="ec-contact-item align-items-center"><i class="ecicon eci-envelope"
+                                        aria-hidden="true"></i><span>Email :</span><a
+                                        href="mailto:example@ec-email.com">example@ec-email.com</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Start -->
+    <%-include('../partials/userFooter' )%>
+    <!-- Footer Area End -->
+
+    
+
+    <!-- Whatsapp -->
+    <div class="ec-style ec-right-bottom">
+        <!-- Start Floating Panel Container -->
+        <!--/ End Floating Panel Container -->
+        <!-- Start Right Floating Button-->
+        <div class="ec-right-bottom">
+            <div class="ec-box">
+                
+            </div>
+        </div>
+        <!--/ End Right Floating Button-->
+    </div>
+    <!-- Whatsapp end -->
+
+    <!-- Feature tools -->
+   
+    <!-- Feature tools end -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            // Show success toast for added coupon
+            if (urlParams.get('success') === 'true') {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Your message has been successfully submitted!',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+    
+                // Remove the `success` parameter from the URL
+                const url = new URL(window.location.href);
+                url.searchParams.delete('success');
+                window.history.replaceState({}, document.title, url.pathname);
+            }
+        });
+    </script>
+    
+
+</body>
+</html>

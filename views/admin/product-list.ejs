@@ -1,0 +1,281 @@
+
+
+<body class="ec-header-fixed ec-sidebar-fixed ec-sidebar-dark ec-header-light" id="body">
+
+    <!-- WRAPPER -->
+    <div class="wrapper">
+
+        <!-- LEFT MAIN SIDEBAR -->
+        <%-include('../partials/adminsidenav' )%>
+
+        <!-- PAGE WRAPPER -->
+        <div class="ec-page-wrapper">
+
+            <!-- Header -->
+            <%-include('../partials/adminHeader' )%>
+
+            <!-- CONTENT WRAPPER -->
+            <div class="ec-content-wrapper">
+                <div class="content">
+                    <div class="breadcrumb-wrapper d-flex align-items-center justify-content-between">
+                        <div>
+                            <h1>Product</h1>
+                            <p class="breadcrumbs"><span><a href="/admin/home">Home</a></span>
+                                <span><i class="mdi mdi-chevron-right"></i></span>Product</p>
+                        </div>
+                        <div>
+                            <a href="/admin/product-add" class="btn btn-primary"> Add Product</a>
+                        </div>
+                    </div>
+
+                    <!-- Search Box -->
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <input type="text" id="productSearch" class="form-control" placeholder="Search Products..." onkeyup="searchProducts()" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-default">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table id="responsive-data-table" class="table" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th>Name</th>
+                                                    <th>Price</th>
+                                                    <th>Category</th>
+                                                    <th>Description</th>
+                                                    <th>Date</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="productTableBody">
+                                                <% if (products.length > 0) { %>
+                                                    <% products.reverse().forEach(product => { %>
+                                                        <tr>
+                                                            <td><img class="tbl-thumb" src="<%= product.image_url %>" alt="Product Image" /></td>
+                                                            <td><%= product.product_name %></td>
+                                                            <td><%= product.price %></td>
+                                                            <td><%= product.category_name %></td>
+                                                            <td><%= product.description %></td>
+                                                            <td><%= product.created_at %></td>
+                                                            <td>
+                                                                <div class="btn-group mb-1">
+                                                                    <button type="button" class="btn btn-outline-success dropdown-toggle dropdown-toggle-split"
+                                                                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <span class="sr-only">Info</span>
+                                                                    </button>
+                                                                    <div class="dropdown-menu">
+                                                                        <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#EditUser" onclick="loadUserData('<%= product.product_id %>')">Edit</a>
+                                                                        <form action="/admin/productsDelete/<%= product.product_id %>" method="POST" style="display: inline;" onsubmit="return confirmDelete();">
+                                                                            <button type="submit" class="dropdown-item" style="background: none; border: none; padding: 0;">Delete</button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    <% }) %>
+                                                <% } else { %>
+                                                    <tr>
+                                                        <td colspan="7" class="text-center">No products available</td>
+                                                    </tr>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal for Edit User -->
+                    <!-- Modal for Edit User -->
+                    <div class="modal fade modal-add-contact" id="EditUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <form id="editUserForm" class="row g-3 p-3" action="" method="POST" enctype="multipart/form-data">
+                                    <!-- Image Upload Section -->
+                                    <div class="col-md-12 text-center">
+                                        <div class="avatar-edit mb-3">
+                                            <input type="file" id="image_url" name="image_url" class="ec-image-upload" accept=".png, .jpg, .jpeg" />
+                                            <label for="image_url">
+                                                <img src="assets/img/icons/edit.svg" class="svg_img header_svg" alt="edit" />
+                                            </label>
+                                        </div>
+                                        <img id="productImage" src="" alt="Product Image" style="max-width: 200px; margin-top: 10px; display: none;" />
+                                    </div>
+                    
+                                    <!-- Form Details Section -->
+                                    <div class="col-lg-12">
+                                        <div class="ec-vendor-upload-detail row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="productName" class="form-label">Product Name</label>
+                                                <input type="text" class="form-control" id="product_name" name="product_name">
+                                            </div>
+                    
+                                            <div class="col-md-12 mb-3">
+                                                <label class="form-label">Short Description</label>
+                                                <textarea class="form-control" id="description" name="description" rows="2"></textarea>
+                                            </div>
+                    
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">Price <span>(In USD)</span></label>
+                                                <input type="number" class="form-control" id="price" name="price">
+                                            </div>
+                    
+                                            <div class="col-md-6 mb-3">
+                                                <label for="category" class="form-label">Category</label>
+                                                <select class="form-control" id="category" name="category">
+                                                    <optgroup label="Select Category">
+                                                      <% categories.forEach(category => { %>
+                                                        <option value="<%= category.categoryName %>"><%= category.categoryName %></option>
+                                                      <% }); %>
+                                                    </optgroup>
+                                                  </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <!-- Submit Button -->
+                                    <div class="col-md-12 text-center mt-3">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+
+                </div> <!-- End Content -->
+            </div> <!-- End Content Wrapper -->
+
+            <!-- Footer -->
+            <%-include('../partials/adminFooter' )%>
+
+        </div> <!-- End Page Wrapper -->
+    </div> <!-- End Wrapper -->
+
+    <script>
+        // Function to search through the product data
+        function searchProducts() {
+            let input = document.getElementById('productSearch');
+            let filter = input.value.toLowerCase();
+            let rows = document.getElementById('productTableBody').getElementsByTagName('tr');
+
+            Array.from(rows).forEach(row => {
+                let cells = row.getElementsByTagName('td');
+                let name = cells[1].textContent.toLowerCase();
+                let description = cells[3].textContent.toLowerCase();
+                let price = cells[2].textContent.toLowerCase();
+
+                // If any cell matches the search term, show the row
+                if (name.includes(filter) || description.includes(filter) || price.includes(filter)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+
+		function loadUserData(id) {
+			fetch(`/admin/productsByid/${id}`)
+				.then((response) => response.json())
+				.then((data) => {
+					// Ensure product data exists
+
+					if (!data.product) {
+						alert('Product not found!');
+						return;
+					}
+		
+					// Check and set product name
+					document.getElementById('product_name').value = data.product.product_name;
+		
+					// Check and set description
+					document.getElementById('description').value = data.product.description;
+		
+					// Check and set price
+					document.getElementById('price').value = data.product.price;
+					document.getElementById('category').value = data.product.category_name;
+
+					
+					// Handle image URL if available
+					const imgElement = document.getElementById('productImage');
+					const imageInput = document.getElementById('image_url')
+		
+					if (data.product.image_url) {
+						// If image URL exists, display it in the modal
+						imgElement.src = data.product.image_url; // Set the src of the image to the fetched URL
+						imgElement.style.display = 'block'; // Ensure the image is visible
+					} else {
+						// If no image, hide the preview image
+						imgElement.style.display = 'none';
+					}
+		
+					// Log data for debugging
+					console.log("Fetched product data:", data);
+		
+					// Update form action dynamically to the correct product update URL
+					document.getElementById('editUserForm').action = `/admin/productsUpdate/${id}`;
+				})
+				.catch((error) => {
+					console.error('Error fetching product data:', error.message);
+					alert(error.message);
+				});
+		}
+		</script>
+		<script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const urlParams = new URLSearchParams(window.location.search);
+                
+                // Show success toast for added coupon
+                if (urlParams.get('success') === 'true') {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Product added successfully!',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+                }
+                
+                // Show success toast for deleted coupon
+               
+        if (urlParams.get('deleted') === 'true') {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: 'Product deleted successfully!',
+            showConfirmButton: false,
+            timer: 3000
+        });
+        }
+
+        if (urlParams.get('updated') === 'true') {
+Swal.fire({
+    toast: true,
+    position: 'top-end',
+    icon: 'success',
+    title: 'Updated  successfully!',
+    showConfirmButton: false,
+    timer: 3000
+});
+}
+            });
+        </script>
+	<!-- Common Javascript -->
+	
+</body>
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this Product?");
+    }
+</script>
+</html>

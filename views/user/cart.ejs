@@ -1,0 +1,340 @@
+<style>
+    .cart-quantity-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-quantity-input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+</style>
+
+<body class="cart_page">
+    <div id="ec-overlay">
+        <div class="ec-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+    <!-- Header start  -->
+     <%-include('../partials/userHeader' )%>
+    <!-- Header End  -->
+
+    <!-- ekka Cart Start -->
+    <div class="ec-side-cart-overlay"></div>
+    <div id="ec-side-cart" class="ec-side-cart">
+        <div class="ec-cart-inner">
+            <div class="ec-cart-top">
+                <div class="ec-cart-title">
+                    <span class="cart_title">My Cart</span>
+                    <button class="ec-close">×</button>
+                </div>
+                <ul class="eccart-pro-items">
+                    <li>
+                        <a href="product-left-sidebar.html" class="sidekka_pro_img"><img
+                                src="assets/images/product-image/6_1.jpg" alt="product"></a>
+                        <div class="ec-pro-content">
+                            <a href="product-left-sidebar.html" class="cart_pro_title">T-shirt For Women</a>
+                            <span class="cart-price"><span>$76.00</span> x 1</span>
+                            <div class="qty-plus-minus">
+                                <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
+                            </div>
+                            <a href="javascript:void(0)" class="remove">×</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="product-left-sidebar.html" class="sidekka_pro_img"><img
+                                src="assets/images/product-image/12_1.jpg" alt="product"></a>
+                        <div class="ec-pro-content">
+                            <a href="product-left-sidebar.html" class="cart_pro_title">Women Leather Shoes</a>
+                            <span class="cart-price"><span>$64.00</span> x 1</span>
+                            <div class="qty-plus-minus">
+                                <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
+                            </div>
+                            <a href="javascript:void(0)" class="remove">×</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="product-left-sidebar.html" class="sidekka_pro_img"><img
+                                src="assets/images/product-image/3_1.jpg" alt="product"></a>
+                        <div class="ec-pro-content">
+                            <a href="product-left-sidebar.html" class="cart_pro_title">Girls Nylon Purse</a>
+                            <span class="cart-price"><span>$59.00</span> x 1</span>
+                            <div class="qty-plus-minus">
+                                <input class="qty-input" type="text" name="ec_qtybtn" value="1" />
+                            </div>
+                            <a href="javascript:void(0)" class="remove">×</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="ec-cart-bottom">
+                <div class="cart-sub-total">
+                    <table class="table cart-table">
+                        <tbody>
+                            <tr>
+                                <td class="text-left">Sub-Total :</td>
+                                <td class="text-right">$300.00</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">VAT (20%) :</td>
+                                <td class="text-right">$60.00</td>
+                            </tr>
+                            <tr>
+                                <td class="text-left">Total :</td>
+                                <td class="text-right primary-color">$360.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cart_btn">
+                    <a href="cart.html" class="btn btn-primary">View Cart</a>
+                    <a href="checkout.html" class="btn btn-secondary">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ekka Cart End -->
+
+    <!-- Ec breadcrumb start -->
+    <div class="sticky-header-next-sec  ec-breadcrumb section-space-mb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row ec_breadcrumb_inner">
+                        <div class="col-md-6 col-sm-12">
+                            <h2 class="ec-breadcrumb-title">Cart</h2>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <!-- ec-breadcrumb-list start -->
+                            <ul class="ec-breadcrumb-list">
+                                <li class="ec-breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="ec-breadcrumb-item active">Cart</li>
+                            </ul>
+                            <!-- ec-breadcrumb-list end -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Ec breadcrumb end -->
+
+    <!-- Ec cart page -->
+    <section class="ec-page-content section-space-p">
+        <div class="container">
+            <div class="row">
+                <div class="ec-cart-leftside col-lg-12 col-md-12 ">
+                    <!-- cart content Start -->
+                    <div class="ec-cart-content">
+                        <div class="ec-cart-inner">
+                            <div class="row">
+                                <form action="#">
+                                    <div class="table-content cart-table-content">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th>Price</th>
+                                                    <th style="text-align: center;">Quantity</th>
+                                                    <th>Total</th>
+                                                    <th>Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="cart-body">
+                                                <% 
+                                                let grandTotal = 0;
+                                                cartItems.reverse().forEach(item => { 
+                                                    const itemTotal = item.product_price * item.quantity;
+                                                    grandTotal += itemTotal;
+                                                %>
+                                                
+                                                <tr>
+                                                    <td data-label="Product" class="ec-cart-pro-name">
+                                                        <a href="/product-single/<%= item.product_id %>">
+                                                            <img class="ec-cart-pro-img mr-4" src="<%= item.product_image %>" alt="" />
+                                                            <%= item.product_name %>
+                                                        </a>
+                                                    </td>
+                                                    <td data-label="Price" class="ec-cart-pro-price">
+                                                        <span class="amount">AED <%= item.product_price %></span>
+                                                    </td>
+                                                    <td data-label="Quantity" class="ec-cart-pro-qty" style="text-align: center;">
+                                                        <div class="cart-quantity-wrapper">
+                                                            <form 
+                                                                action="/cart-update/<%= item.id %>" 
+                                                                method="POST" 
+                                                                class="update-quantity-form"
+                                                                >
+                                                                <input 
+                                                                    class="cart-quantity-input" 
+                                                                    type="number" 
+                                                                    name="cartqtybutton" 
+                                                                    value="<%= item.quantity %>" 
+                                                                    data-product-id="<%= item.id %>" 
+                                                                    min="1" 
+                                                                    step="1" 
+                                                                    required />
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                    
+                                                    <td data-label="Total" class="ec-cart-pro-subtotal">AED <%= (item.product_price * item.quantity).toFixed(2) %></td>
+                                                    <td data-label="Remove" class="ec-cart-pro-remove">
+                                                        <form action="/cart-delete/<%= item.id %>" method="POST" class="delete-form">
+                                                            <button type="submit">
+                                                                <i class="ecicon eci-trash-o"></i>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <% }); %>
+                                            </tbody>
+                                           
+                                            <tr>
+                                                <td colspan="3" style="text-align: right; font-weight: bold;">Grand Total:</td>
+                                                <td colspan="2" style="font-weight: bold;">AED <%= grandTotal.toFixed(2) %></td>
+                                            </tr>
+                                     
+                                            
+                                        </table>
+                                    </div>
+                                    <% if (cartItems.length > 0) { %>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="ec-cart-update-bottom">
+                                                    <a href="/product-side">Continue Shopping</a>
+                                                    <form action="/checkout" method="get" id="checkoutForm">
+                                                        <input type="hidden" name="itemQuantity" id="itemQuantity" value="<%= total %>">
+                                                        <input type="hidden" name="grandTotal" id="grandTotalInput" value="<%= grandTotal.toFixed(2) %>">
+                                                        <button type="submit" class="btn btn-primary" style="text-decoration: none; color: #fff;">Check Out</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <% } %>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--cart content End -->
+                </div>
+                <!-- Sidebar Area Start -->
+              
+            </div>
+        </div>
+    </section>
+
+    <!-- New Product Start -->
+    
+    <!-- New Product end -->
+
+    <!-- Footer Start -->
+    <%-include('../partials/userFooter' )%>
+    <!-- Footer Area End -->
+
+    <!-- Modal -->
+ 
+    <!-- Modal end -->
+
+
+
+    <div class="ec-style ec-right-bottom">
+        <!-- Start Floating Panel Container -->
+
+        <!--/ End Floating Panel Container -->
+        <!-- Start Right Floating Button-->
+        <div class="ec-right-bottom">
+            <div class="ec-box">
+               
+            </div>
+        </div>
+        <!--/ End Right Floating Button-->
+    </div>
+    <!-- Whatsapp end -->
+
+  
+    <!-- Feature tools end -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+    
+            // Show success toast for removed item
+            if (urlParams.get('deleted') === 'true') {
+                if (typeof Swal !== "undefined") { // Ensure Swal is loaded
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Item removed!',
+                        showConfirmButton: false,
+                        timer: 3000
+                    });
+    
+                    // Optionally remove the query parameter from the URL
+                    const newUrl = window.location.origin + window.location.pathname;
+                    window.history.replaceState({}, document.title, newUrl);
+                } else {
+                    console.error("SweetAlert is not loaded on this page.");
+                }
+            }
+        });
+
+        function confirmRemove(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Confirm removal
+        if (confirm('Are you sure you want to remove this item?')) {
+            event.target.submit(); // Submit the form only if confirmed
+        }
+    }
+
+
+    document.querySelectorAll('.cart-quantity-input').forEach(input => {
+    input.addEventListener('change', async (event) => {
+        const productId = event.target.dataset.productId; // Get product ID
+        const quantity = event.target.value; // Get new quantity
+
+        if (quantity < 0) {
+            alert("Quantity cannot be negative!");
+            return;
+        }
+
+        // Send the updated quantity to the server
+        const response = await fetch(`/cart-update/${productId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ quantity: quantity }),
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            // alert(result.message);
+            location.reload(); // Reload to reflect changes (optional)
+        } else {
+            // alert(result.message);
+        }
+    });
+});
+
+        
+    </script>
+    
+
+</body>
+
+</html>
